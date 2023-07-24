@@ -1,11 +1,21 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
 
-class MapController extends GetxController {
-  MapController();
+class HomeController extends GetxController {
+  HomeController();
+  final PageController pageController = PageController(viewportFraction: 0.8);
 
-  final state = MapState();
+  final state = HomeState();
+  List<String> buttonText = [
+    "Ücretsiz Tahminler",
+    "Premium Tahminler",
+    "Geçmiş Tahminler",
+    "Özel Kupon",
+    "Geçmiş Kuponlar",
+    "Canlı Maçlar"
+  ];
 
   // tap
   void handleTap(int index) {

@@ -33,7 +33,6 @@ Future<void> main() async {
 
   runApp(
     ScreenUtilInit(
-      // todo add your (Xd / Figma) artboard size
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
@@ -41,8 +40,7 @@ Future<void> main() async {
       rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
-          // todo add your app name
-          title: "Servis Hane",
+          title: "Maç Takip",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           builder: (context, widget) {
@@ -50,8 +48,6 @@ Future<void> main() async {
             return Theme(
               data: MyTheme.getThemeData(isLight: themeIsLight),
               child: MediaQuery(
-                // prevent font from scalling (some people use big/small device fonts)
-                // but we want our app font to still the same and dont get affected
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: widget!,
               ),

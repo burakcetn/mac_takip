@@ -16,7 +16,7 @@ dependencies:
   dio: # for api requests
   http_mock_adapter: # mocking dio for testing
   pretty_dio_logger: # for dio api logging and debugging
-
+ 
   hive:  # local database (SQFlite replacement)
   hive_flutter: # make it easy to use hive (no need fo r path provider)
   shared_preferences: # shared preferences persistence key value store
@@ -32,7 +32,7 @@ dependencies:
 
   flutter: 
     sdk: flutter
-
+ 
 dev_dependencies:
   mockito:
   flutter_lints:

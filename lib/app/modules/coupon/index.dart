@@ -1,4 +1,4 @@
-library map;
+library coupon;
 
 export './state.dart';
 export './controller.dart';

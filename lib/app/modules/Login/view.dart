@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
-class MapPage extends GetView<MapController> {
-  const MapPage({Key? key}) : super(key: key);
+class LoginPage extends GetView<LoginController> {
+  const LoginPage({Key? key}) : super(key: key);
 
   // 主视图
   Widget _buildView() {
@@ -14,10 +14,10 @@ class MapPage extends GetView<MapController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<MapController>(
+    return GetBuilder<LoginController>(
       builder: (_) {
         return Scaffold(
-          appBar: AppBar(title: const Text("map")),
+          appBar: AppBar(title: const Text("login")),
           body: SafeArea(
             child: _buildView(),
           ),

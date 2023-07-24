@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class MapState {
+class ProfileState {
   // title
   final _title = "".obs;
   set title(value) => _title.value = value;
