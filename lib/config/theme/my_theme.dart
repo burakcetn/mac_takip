@@ -10,6 +10,7 @@ class MyTheme {
   static getThemeData({required bool isLight}) {
     return ThemeData(
       // main color (app bar,tabs..etc)
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       primaryColor: isLight
           ? LightThemeColors.primaryColor
           : DarkThemeColors.primaryColor,

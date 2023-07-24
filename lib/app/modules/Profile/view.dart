@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../utils/color_manager.dart';
 import '../../components/AppbarClipper.dart';
-import '../../components/CustomNavbar/custom_navbar.dart';
+import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -23,7 +23,6 @@ class ProfilePage extends GetView<ProfileController> {
 
         return Scaffold(
           backgroundColor: ColorManager.base20,
-          bottomNavigationBar: CustomBottomNavbar(),
           body: Column(
             children: [
               SizedBox(

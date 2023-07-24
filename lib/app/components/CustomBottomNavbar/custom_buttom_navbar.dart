@@ -1,13 +1,38 @@
+import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 import '../../../utils/color_manager.dart';
 import 'package:get/get.dart';
 
-class CustomBottomNavbar extends StatelessWidget {
-  const CustomBottomNavbar({Key? key}) : super(key: key);
+import 'custom_bottom_navbar_item.dart';
 
+class CustomBottomNavbar extends StatelessWidget {
+  CustomBottomNavbar({
+    Key? key,
+    required this.items,
+    this.initIndex = 0,
+  }) : super(key: key);
+
+  int initIndex = 0;
+  List<CustomBottomNavbarItem> items;
   @override
   Widget build(BuildContext context) {
+    return Container(
+      height: 100,
+      child: AnimatedNotchBottomBar(
+        bottomBarItems: items.map((e) => e.item).toList(),
+        notchBottomBarController: NotchBottomBarController(index: initIndex),
+        durationInMilliSeconds: 360,
+        removeMargins: false,
+        onTap: (index) {
+          items[index].onClickItem();
+        },
+        showBlurBottomBar: true,
+        blurOpacity: 0.2,
+        blurFilterX: 5,
+        blurFilterY: 10,
+      ),
+    );
     return BottomAppBar(
       surfaceTintColor: ColorManager.base00,
       elevation: 5,

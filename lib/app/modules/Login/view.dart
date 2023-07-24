@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/login_form.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/register_form.dart';
+import 'package:getx_skeleton/app/routes/app_pages.dart';
 
 import '../../../config/translations/localization_service.dart';
 import '../../../utils/color_manager.dart';
@@ -101,7 +102,8 @@ class LoginPage extends GetView<LoginController> {
                           return controller.formType.value == FormType.login
                               ? LoginForm(
                                   login: (email, password) async {
-                                    await Future.delayed(4.seconds);
+                                    await Future.delayed(1.seconds);
+                                    Get.offAndToNamed(Routes.HOME);
                                     return false;
                                   },
                                 )

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/components/base_page.dart';
 import 'package:getx_skeleton/utils/awesome_notifications_helper.dart';
 
 import 'app/data/local/my_hive.dart';
@@ -43,14 +44,12 @@ Future<void> main() async {
           title: "Maç Takip",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
+
           builder: (context, widget) {
             bool themeIsLight = MySharedPref.getThemeIsLight();
             return Theme(
               data: MyTheme.getThemeData(isLight: themeIsLight),
-              child: MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: widget!,
-              ),
+              child: BasePage(child: widget),
             );
           },
           initialRoute:

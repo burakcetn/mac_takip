@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../utils/color_manager.dart';
-import '../../components/CustomNavbar/custom_navbar.dart';
+import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -21,7 +21,6 @@ class PrecouponPage extends GetView<PrecouponController> {
         final double screenW = MediaQuery.of(context).size.width;
         return Scaffold(
           backgroundColor: ColorManager.base20,
-          bottomNavigationBar: CustomBottomNavbar(),
           body: SafeArea(
             child: Column(
               children: [

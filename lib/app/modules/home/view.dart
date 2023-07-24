@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 
 import '../../../utils/color_manager.dart';
-import '../../components/CustomNavbar/custom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -16,8 +15,6 @@ class HomePage extends GetView<HomeController> {
     return GetBuilder<HomeController>(
       builder: (_) {
         return Scaffold(
-          backgroundColor: ColorManager.base20,
-          bottomNavigationBar: CustomBottomNavbar(),
           appBar: AppBar(
             backgroundColor: ColorManager.base20,
             systemOverlayStyle: SystemUiOverlayStyle(
@@ -36,6 +33,7 @@ class HomePage extends GetView<HomeController> {
             ),
             title: Text("Uygulama Adı"),
           ),
+          backgroundColor: ColorManager.base20,
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
