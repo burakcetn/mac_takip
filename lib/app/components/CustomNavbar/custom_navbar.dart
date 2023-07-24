@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 import '../../../utils/color_manager.dart';
+import 'package:get/get.dart';
 
 class CustomBottomNavbar extends StatelessWidget {
   const CustomBottomNavbar({Key? key}) : super(key: key);
@@ -15,7 +15,9 @@ class CustomBottomNavbar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           GestureDetector(
-            onTap: () => Get.offAndToNamed(Routes.HOME),
+            onTap: () {
+              Get.toNamed(Routes.LOGIN);
+            },
             child: SizedBox(
               height: 50,
               width: 50,
@@ -27,7 +29,9 @@ class CustomBottomNavbar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.offAndToNamed(Routes.PRECOUPON),
+            onTap: () {
+              Get.toNamed(Routes.PRECOUPON);
+            },
             child: SizedBox(
               height: 50,
               width: 50,
@@ -39,7 +43,9 @@ class CustomBottomNavbar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.offAndToNamed(Routes.FREECOUPON),
+            onTap: () {
+              Get.toNamed(Routes.FREECOUPON);
+            },
             child: SizedBox(
               height: 50,
               width: 50,
@@ -51,7 +57,9 @@ class CustomBottomNavbar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.offAndToNamed(Routes.LIVE),
+            onTap: () {
+              Get.toNamed(Routes.LIVE);
+            },
             child: SizedBox(
               height: 50,
               width: 50,
@@ -63,7 +71,9 @@ class CustomBottomNavbar extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => Get.offAndToNamed(Routes.PROFILE),
+            onTap: () {
+              Get.toNamed(Routes.PROFILE);
+            },
             child: SizedBox(
               height: 50,
               width: 50,

@@ -9,6 +9,7 @@ abstract class Routes {
   static const PRECOUPON = _Paths.PRECOUPON;
   static const LIVE = _Paths.LIVE;
   static const PROFILE = _Paths.PROFILE;
+  static const LOGIN = _Paths.LOGIN;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const PRECOUPON = '/precoupon';
   static const LIVE = '/live';
   static const PROFILE = '/profile';
+  static const LOGIN = '/login';
 }

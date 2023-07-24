@@ -55,7 +55,7 @@ Future<void> main() async {
           },
           initialRoute:
               AppPages.INITIAL, // first screen to show when app is running
-          getPages: AppPages.routes, // app screens
+          getPages: AppPages.appRoutes(), // app screens
           locale: MySharedPref.getCurrentLocal(), // app language
           translations: LocalizationService
               .getInstance(), // localization services in app (controller app language)

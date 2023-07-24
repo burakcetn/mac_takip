@@ -1,10 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'index.dart';
 
+enum FormType { login, register }
+
 class LoginController extends GetxController {
   LoginController();
 
+  Rx<FormType> formType = FormType.login.obs;
   final state = LoginState();
 
   // tap
@@ -38,4 +42,9 @@ class LoginController extends GetxController {
   void dispose() {
     super.dispose();
   }
+
+  Future<void> loginUser(String email, String password) async {}
+
+  Future<void> registerUser(String email, String password, String rePassword,
+      String userName) async {}
 }

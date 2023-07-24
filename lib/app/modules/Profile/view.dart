@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../utils/color_manager.dart';
+import '../../components/AppbarClipper.dart';
+import '../../components/CustomNavbar/custom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -16,10 +19,194 @@ class ProfilePage extends GetView<ProfileController> {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
       builder: (_) {
+        final double screenW = MediaQuery.of(context).size.width;
+
         return Scaffold(
-          appBar: AppBar(title: const Text("profile")),
-          body: SafeArea(
-            child: _buildView(),
+          backgroundColor: ColorManager.base20,
+          bottomNavigationBar: CustomBottomNavbar(),
+          body: Column(
+            children: [
+              SizedBox(
+                height: 300,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topCenter,
+                      child: ClipPath(
+                        clipper: AppbarClipper(),
+                        child: Container(
+                          height: 250,
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(color: Colors.deepPurple),
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 150,
+                        width: screenW * 0.8,
+                        decoration: BoxDecoration(
+                          color: ColorManager.base00,
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                                color:
+                                    ColorManager.shadowColor.withOpacity(0.3),
+                                blurRadius: 10),
+                            BoxShadow(
+                              color: ColorManager.shadowColor.withOpacity(0.3),
+                              spreadRadius: -2,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "Kullanıcı Adı",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headlineSmall
+                                  ?.copyWith(
+                                      color: ColorManager.base120,
+                                      fontWeight: FontWeight.w600),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "Üyelik Tipi :",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                                Text(
+                                  "Premium",
+                                  style: Theme.of(context).textTheme.bodyLarge,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Transform(
+                      transform: Matrix4.translationValues(0, 50, 0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: CircleAvatar(
+                          radius: 40,
+                          backgroundColor: ColorManager.base00,
+                          child: Icon(Icons.person),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 80,
+                  width: screenW * 0.8,
+                  decoration: BoxDecoration(
+                    color: ColorManager.base00,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorManager.shadowColor.withOpacity(0.3),
+                          blurRadius: 10),
+                      BoxShadow(
+                        color: ColorManager.shadowColor.withOpacity(0.3),
+                        spreadRadius: -2,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Text(
+                        "Kalan Gün :",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: ColorManager.base120,
+                                fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        "30",
+                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                            color: ColorManager.base120,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 80,
+                  width: screenW * 0.8,
+                  decoration: BoxDecoration(
+                    color: ColorManager.base00,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorManager.shadowColor.withOpacity(0.3),
+                          blurRadius: 10),
+                      BoxShadow(
+                        color: ColorManager.shadowColor.withOpacity(0.3),
+                        spreadRadius: -2,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Paketleri İncele",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: ColorManager.base120,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 60,
+                  width: screenW * 0.8,
+                  decoration: BoxDecoration(
+                    color: ColorManager.failure,
+                    borderRadius: BorderRadius.circular(15),
+                    boxShadow: [
+                      BoxShadow(
+                          color: ColorManager.shadowColor.withOpacity(0.3),
+                          blurRadius: 10),
+                      BoxShadow(
+                        color: ColorManager.shadowColor.withOpacity(0.3),
+                        spreadRadius: -2,
+                        blurRadius: 5,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      "Hesabımı Kapat",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: ColorManager.base00,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         );
       },
