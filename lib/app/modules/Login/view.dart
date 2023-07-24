@@ -102,9 +102,8 @@ class LoginPage extends GetView<LoginController> {
                           return controller.formType.value == FormType.login
                               ? LoginForm(
                                   login: (email, password) async {
-                                    await Future.delayed(1.seconds);
-                                    Get.offAndToNamed(Routes.HOME);
-                                    return false;
+                                    return await controller.loginUser(
+                                        email, password);
                                   },
                                 )
                               : RegisterForm(

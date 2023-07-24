@@ -8,6 +8,8 @@ import 'package:getx_skeleton/app/modules/Profile/index.dart';
 import 'package:getx_skeleton/app/modules/coupon/index.dart';
 import 'package:getx_skeleton/app/modules/home/index.dart';
 
+import '../middlewares/auth_middleware.dart';
+
 part 'app_routes.dart';
 
 class AppPages {
@@ -22,6 +24,9 @@ class AppPages {
           binding: HomeBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.COUPON,
@@ -29,6 +34,9 @@ class AppPages {
           binding: CouponBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.FREECOUPON,
@@ -36,6 +44,9 @@ class AppPages {
           binding: FreecouponBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.PRECOUPON,
@@ -43,6 +54,9 @@ class AppPages {
           binding: PrecouponBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.LIVE,
@@ -50,6 +64,9 @@ class AppPages {
           binding: LiveBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.PROFILE,
@@ -57,6 +74,9 @@ class AppPages {
           binding: ProfileBinding(),
           transition: Transition.rightToLeftWithFade,
           transitionDuration: 300.milliseconds,
+          middlewares: [
+            AuthMiddleWare(),
+          ],
         ),
         GetPage(
           name: Routes.LOGIN,

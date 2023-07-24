@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/components/custom_snackbar.dart';
+import 'package:getx_skeleton/app/routes/app_pages.dart';
 
+import '../../repositories/users/user_repository.dart';
 import 'index.dart';
 
 enum FormType { login, register }
 
 class LoginController extends GetxController {
   LoginController();
-
+  UserRepository repository = UserRepository();
   Rx<FormType> formType = FormType.login.obs;
   final state = LoginState();
 
@@ -43,7 +46,17 @@ class LoginController extends GetxController {
     super.dispose();
   }
 
-  Future<void> loginUser(String email, String password) async {}
+  Future<bool> loginUser(String email, String password) async {
+    var result = await repository.login(email, password);
+
+    if (result) {
+      Get.offAndToNamed(Routes.HOME);
+      return true;
+    } else {
+      CustomSnackBar.showCustomToast(message: "giriş yapılamadı");
+    }
+    return false;
+  }
 
   Future<void> registerUser(String email, String password, String rePassword,
       String userName) async {}

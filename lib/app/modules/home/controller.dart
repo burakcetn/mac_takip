@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/match/match_repository.dart';
+import 'package:getx_skeleton/app/repositories/users/user_repository.dart';
+import 'package:getx_skeleton/models/match/live_match_model.dart';
 
 import 'index.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController with MatchRepository {
   HomeController();
   final PageController pageController = PageController(viewportFraction: 0.8);
-
   final state = HomeState();
   List<String> buttonText = [
     "Ücretsiz Tahminler",

@@ -4,11 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/base_page.dart';
 import 'package:getx_skeleton/utils/awesome_notifications_helper.dart';
-
-import 'app/data/local/my_hive.dart';
 import 'app/data/local/my_shared_pref.dart';
-import 'app/data/models/user_model.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/service_init.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
 import 'utils/fcm_helper.dart';
@@ -18,10 +16,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // initialize local db (hive) and register our custom adapters
-  await MyHive.init(registerAdapters: (hive) {
-    hive.registerAdapter(UserModelAdapter());
-    //myHive.registerAdapter(OtherAdapter());
-  });
 
   // init shared preference
   await MySharedPref.init();
@@ -31,7 +25,7 @@ Future<void> main() async {
 
   // initialize local notifications service
   await AwesomeNotificationsHelper.init();
-
+  await ServiceInit.init();
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),

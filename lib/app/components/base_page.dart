@@ -43,7 +43,9 @@ class _BasePageState extends State<BasePage> with TickerProviderStateMixin {
                   ),
                 ),
                 onClickItem: () {
-                  Get.toNamed(Routes.HOME);
+                  Get.toNamed(
+                    Routes.HOME,
+                  );
                 }),
             CustomBottomNavbarItem(
                 item: BottomBarItem(

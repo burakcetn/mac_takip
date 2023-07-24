@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
+import 'package:getx_skeleton/models/match/live_match_model.dart';
 
 import '../../../utils/color_manager.dart';
+import '../../components/custom_future_builder.dart';
+import '../../components/custom_snackbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -64,140 +67,25 @@ class HomePage extends GetView<HomeController> {
               ),
               SizedBox(
                 height: 200,
-                child: PageView.builder(
-                    controller: controller.pageController,
-                    itemCount: 5,
-                    itemBuilder: (context, itemNumber) {
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        child: Container(
-                          height: 180,
-                          width: 180,
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                  color:
-                                      ColorManager.shadowColor.withOpacity(0.3),
-                                  blurRadius: 10),
-                              BoxShadow(
-                                color:
-                                    ColorManager.shadowColor.withOpacity(0.3),
-                                spreadRadius: -2,
-                                blurRadius: 5,
-                              ),
-                            ],
-                            image: DecorationImage(
-                              opacity: 0.3,
-                              alignment: Alignment.topRight,
-                              image: itemNumber.isEven
-                                  ? AssetImage(
-                                      "assets/images/homepage_screen1.png")
-                                  : AssetImage(
-                                      "assets/images/homepage_screen2.png"),
-                            ),
-                            color: itemNumber.isEven
-                                ? Colors.purple
-                                : Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Column(
-                            children: [
-                              Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  Text(
-                                    "Premier League",
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge
-                                        ?.copyWith(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
-                                  ),
-                                  Text(
-                                    "Week 10",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 32,
-                                        ),
-                                        Text(
-                                          "Newcastle",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        Text("Home",
-                                            style:
-                                                TextStyle(color: Colors.white))
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text("0:3",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                        Container(
-                                          height: 40,
-                                          width: 60,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              color: itemNumber.isOdd
-                                                  ? Colors.purple
-                                                  : Colors.blueAccent),
-                                          child: Center(
-                                              child: Text("83",
-                                                  style: TextStyle(
-                                                      color: Colors.white))),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                      ],
-                                    ),
-                                    Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 32,
-                                        ),
-                                        Text("Newcastle",
-                                            style:
-                                                TextStyle(color: Colors.white)),
-                                        Text("Home",
-                                            style:
-                                                TextStyle(color: Colors.white))
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
+                child: CustomFutureBuilder<List<LiveMatchModel>>(
+                  future: controller.getLiveMatch(),
+                  onError: (message) {
+                    return Container();
+                  },
+                  onDataEmpty: () {
+                    return Text("Canlı Maç Bulunamadı");
+                  },
+                  onSuccess: (items) {
+                    return PageView.builder(
+                        physics: BouncingScrollPhysics(),
+                        controller: controller.pageController,
+                        itemCount: items.length,
+                        itemBuilder: (context, itemNumber) {
+                          LiveMatchModel item = items[itemNumber];
+                          return LiveMatchItemWidget(item: item);
+                        });
+                  },
+                ),
               ),
               SizedBox(
                 height: 12,
@@ -250,6 +138,142 @@ class HomePage extends GetView<HomeController> {
           ),
         );
       },
+    );
+  }
+}
+
+class LiveMatchItemWidget extends StatelessWidget {
+  const LiveMatchItemWidget({
+    Key? key,
+    required this.item,
+  }) : super(key: key);
+
+  final LiveMatchModel item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Container(
+        height: 180,
+        width: 180,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+                color: ColorManager.shadowColor.withOpacity(0.3),
+                blurRadius: 10),
+            BoxShadow(
+              color: ColorManager.shadowColor.withOpacity(0.3),
+              spreadRadius: -2,
+              blurRadius: 5,
+            ),
+          ],
+          image: DecorationImage(
+            opacity: 0.3,
+            alignment: Alignment.topRight,
+            image: item.macid!.isEven
+                ? AssetImage("assets/images/homepage_screen1.png")
+                : AssetImage("assets/images/homepage_screen2.png"),
+          ),
+          color: item.macid!.isEven ? Colors.purple : Colors.blueAccent,
+          borderRadius: BorderRadius.circular(30),
+        ),
+        child: Column(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  item.lig ?? "",
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: Colors.white, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  "Week 10",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 20,
+                          child: Image.network(
+                            "https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbahçe_SK.png/200px-Fenerbahçe_SK.png",
+                          ),
+                        ),
+                        Text(
+                          item.ev ?? "",
+                          style: TextStyle(
+                              color: Colors.white,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        Text("Home", style: TextStyle(color: Colors.white))
+                      ],
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text("${item.evgol}:${item.depgol}",
+                          style: TextStyle(color: Colors.white)),
+                      Container(
+                        height: 40,
+                        width: 60,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(30),
+                            color: item.macid!.isOdd
+                                ? Colors.purple
+                                : Colors.blueAccent),
+                        child: Center(
+                            child: Text(item.dk ?? "",
+                                style: TextStyle(color: Colors.white))),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        CircleAvatar(
+                          radius: 20,
+                          child: Image.network(
+                            "https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbahçe_SK.png/200px-Fenerbahçe_SK.png",
+                          ),
+                        ),
+                        Text(
+                          item.konuk ?? "",
+                          style: TextStyle(
+                              color: Colors.white,
+                              overflow: TextOverflow.ellipsis),
+                        ),
+                        Text("Guest", style: TextStyle(color: Colors.white))
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
