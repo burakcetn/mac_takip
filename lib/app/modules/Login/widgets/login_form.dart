@@ -68,58 +68,54 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      key: key,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            style: Theme.of(Get.context!).textTheme.labelSmall,
-            controller: email,
-            validator: (value) {
-              return (value == null || value.isEmpty)
-                  ? 'Please Enter Email'
-                  : null;
-            },
-            decoration: inputDecoration('E-mail', Icons.person),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          style: Theme.of(Get.context!).textTheme.labelSmall,
+          controller: email,
+          validator: (value) {
+            return (value == null || value.isEmpty)
+                ? 'Please Enter Email'
+                : null;
+          },
+          decoration: inputDecoration('E-mail', Icons.person),
+        ),
+        SizedBox(
+          height: 24,
+        ),
+        TextFormField(
+          style: Theme.of(context).textTheme.labelSmall,
+          validator: (value) {
+            return (value == null || value.isEmpty)
+                ? 'Please Enter Password'
+                : null;
+          },
+          controller: password,
+          decoration: inputDecoration('Password', Icons.lock),
+        ),
+        SizedBox(
+          height: 32,
+        ),
+        Obx(
+          () => ElevatedButton(
+            onPressed: loginState.value ? null : () => _login(),
+            child: loginState.value
+                ? CircularProgressIndicator() // Show loading indicator
+                : Text('login'.tr),
           ),
-          SizedBox(
-            height: 24,
-          ),
-          TextFormField(
-            style: Theme.of(context).textTheme.labelSmall,
-            validator: (value) {
-              return (value == null || value.isEmpty)
-                  ? 'Please Enter Password'
-                  : null;
-            },
-            controller: password,
-            decoration: inputDecoration('Password', Icons.lock),
-          ),
-          SizedBox(
-            height: 32,
-          ),
-          Obx(
-            () => ElevatedButton(
-              onPressed: loginState.value ? null : () => _login(),
-              child: loginState.value
-                  ? CircularProgressIndicator() // Show loading indicator
-                  : Text('login'.tr),
-            ),
-          ),
-          SizedBox(height: 32),
-          // TextButton(
-          //   onPressed: () {
-          //     setState(() {
-          //       _formType = FormType.register;
-          //     });
-          //   },
-          //   child: Text('register'.tr),
-          // ),
-        ],
-      ),
+        ),
+        SizedBox(height: 32),
+        // TextButton(
+        //   onPressed: () {
+        //     setState(() {
+        //       _formType = FormType.register;
+        //     });
+        //   },
+        //   child: Text('register'.tr),
+        // ),
+      ],
     );
   }
 }

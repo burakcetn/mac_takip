@@ -40,11 +40,12 @@ Future<void> main() async {
       rebuildFactor: (old, data) => true,
       builder: (context, widget) {
         return GetMaterialApp(
-          title: "Maç Takip",
+          title: "Banko Team",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           routingCallback: (route) {
-            showBottom = route?.current != Routes.LOGIN;
+            showBottom.value = route?.current != Routes.LOGIN;
+            showBottom.update((val) {});
             CustomBottomNavbar.changePage(route: route?.current);
           },
           builder: (context, widget) {

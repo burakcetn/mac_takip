@@ -105,30 +105,39 @@ class HomePage extends GetView<HomeController> {
                       crossAxisSpacing: 8,
                       crossAxisCount: 3),
                   itemBuilder: (BuildContext context, int index) {
-                    return Container(
-                      height: 100,
-                      width: 100,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: ColorManager.base00,
-                        boxShadow: [
-                          BoxShadow(
+                    return GestureDetector(
+                      onTap: () {
+                        var route = controller.buttonText[index];
+                        if (route.route.isNotEmpty) {
+                          Get.toNamed(route.route, arguments: route.data);
+                        }
+                      },
+                      child: Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: ColorManager.base00,
+                          boxShadow: [
+                            BoxShadow(
+                                color:
+                                    ColorManager.shadowColor.withOpacity(0.3),
+                                blurRadius: 10),
+                            BoxShadow(
                               color: ColorManager.shadowColor.withOpacity(0.3),
-                              blurRadius: 10),
-                          BoxShadow(
-                            color: ColorManager.shadowColor.withOpacity(0.3),
-                            spreadRadius: -2,
-                            blurRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Center(
-                          child: Text(
-                            controller.buttonText[index],
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.titleMedium,
+                              spreadRadius: -2,
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Center(
+                            child: Text(
+                              controller.buttonText[index].title,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
                           ),
                         ),
                       ),

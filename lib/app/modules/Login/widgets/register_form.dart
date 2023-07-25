@@ -94,56 +94,52 @@ class RegisterForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      key: key,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextFormField(
-            style: Theme.of(context).textTheme.labelSmall,
-            controller: userName,
-            decoration: inputDecoration('Username', Icons.person),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          TextFormField(
-            keyboardType: TextInputType.emailAddress,
-            style: Theme.of(context).textTheme.labelSmall,
-            controller: email,
-            decoration: inputDecoration('E-mail', Icons.person),
-          ),
-          SizedBox(
-            height: 12,
-          ),
-          TextFormField(
-            style: Theme.of(context).textTheme.labelSmall,
-            controller: password,
-            decoration: inputDecoration('Password', Icons.lock),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          TextFormField(
-            controller: rePassword,
-            style: Theme.of(context).textTheme.labelSmall,
-            decoration: inputDecoration('Retype Password', Icons.lock),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          ElevatedButton(
-            onPressed: registerState.value ? null : () => _register(),
-            child: registerState.value
-                ? CircularProgressIndicator() // Show loading indicator
-                : Text('register'.tr),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TextFormField(
+          style: Theme.of(context).textTheme.labelSmall,
+          controller: userName,
+          decoration: inputDecoration('Username', Icons.person),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          style: Theme.of(context).textTheme.labelSmall,
+          controller: email,
+          decoration: inputDecoration('E-mail', Icons.person),
+        ),
+        SizedBox(
+          height: 12,
+        ),
+        TextFormField(
+          style: Theme.of(context).textTheme.labelSmall,
+          controller: password,
+          decoration: inputDecoration('Password', Icons.lock),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        TextFormField(
+          controller: rePassword,
+          style: Theme.of(context).textTheme.labelSmall,
+          decoration: inputDecoration('Retype Password', Icons.lock),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+        ElevatedButton(
+          onPressed: registerState.value ? null : () => _register(),
+          child: registerState.value
+              ? CircularProgressIndicator() // Show loading indicator
+              : Text('register'.tr),
+        ),
+        SizedBox(
+          height: 8,
+        ),
+      ],
     );
   }
 }

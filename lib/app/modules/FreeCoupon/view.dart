@@ -9,6 +9,7 @@ import '../../../models/coupon/coupon_model.dart';
 import '../../../models/data_result/data_result.dart';
 import '../../../models/match/live_match_model.dart';
 import '../../../utils/color_manager.dart';
+import '../../../utils/page_argument.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
@@ -23,6 +24,12 @@ class FreecouponPage extends GetView<FreecouponController> {
 
   @override
   Widget build(BuildContext context) {
+    COUPONTYPE coupontype = COUPONTYPE.NEW;
+
+    if (Get.arguments != null) {
+      coupontype = Get.arguments as COUPONTYPE;
+    }
+
     return GetBuilder<FreecouponController>(
       builder: (_) {
         final double screenW = MediaQuery.of(context).size.width;
@@ -65,9 +72,11 @@ class FreecouponPage extends GetView<FreecouponController> {
                 ),
                 Expanded(
                   child: CustomFutureBuilder<List<FreeCoupon>>(
-                      future: controller.getFreeCoupons(COUPONTYPE.NEW),
+                      future: controller.getFreeCoupons(coupontype),
                       onError: (msg) {
-                        return Text(msg);
+                        return Center(
+                          child: Text("Geçmiş Tahmin Bulunamadı"),
+                        );
                       },
                       onSuccess: (items) {
                         return ListView.builder(

@@ -6,6 +6,7 @@ import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
 import '../../../models/coupon/coupon_model.dart';
 import '../../../models/coupon/free_coupon.dart';
 import '../../../utils/color_manager.dart';
+import '../../../utils/team_logo.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
@@ -61,15 +62,23 @@ class PrecouponPage extends GetView<PrecouponController> {
                 ),
                 Expanded(
                   child: CustomFutureBuilder<List<FreeCoupon>>(
-                      future: controller.getFreeCoupons(COUPONTYPE.NEW),
+                      future: controller.getFreeCoupons(COUPONTYPE.NEW,
+                          mode: COUPONDATA.PREMIUM),
                       onError: (msg) {
                         return Text(msg);
                       },
                       onSuccess: (items) {
                         return ListView.builder(
-                            itemCount: items.length,
+                            itemCount: items.length + 1,
                             itemBuilder: (context, itemNumber) {
-                              var item = items[itemNumber];
+                              if (itemNumber == items.length) {
+                                return SizedBox(
+                                  height: 100,
+                                );
+                              }
+                              FreeCoupon item = items[itemNumber];
+                              var taraflar =
+                                  item.taraflar.toString().split("-");
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 24),
@@ -93,16 +102,38 @@ class PrecouponPage extends GetView<PrecouponController> {
                                     color: ColorManager.base00,
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      Text(
-                                        "Takım1",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text(
+                                                taraflar.first ?? "",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                            ),
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  ColorManager.base00,
+                                              child: Image.network(TeamsLogo()
+                                                  .getLogo(
+                                                      "${taraflar.first}")),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                      CircleAvatar(),
                                       Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -111,7 +142,7 @@ class PrecouponPage extends GetView<PrecouponController> {
                                             padding: const EdgeInsets.only(
                                                 top: 12.0),
                                             child: Text(
-                                              "06:30",
+                                              "${item.oran}",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium
@@ -123,7 +154,7 @@ class PrecouponPage extends GetView<PrecouponController> {
                                             padding: const EdgeInsets.only(
                                                 bottom: 8.0),
                                             child: Text(
-                                              "30 oct",
+                                              "${item.tahmin}",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium
@@ -133,12 +164,29 @@ class PrecouponPage extends GetView<PrecouponController> {
                                           )
                                         ],
                                       ),
-                                      CircleAvatar(),
-                                      Text(
-                                        "Takım1",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  ColorManager.base00,
+                                              child: Image.network(TeamsLogo()
+                                                  .getLogo("${taraflar.last}")),
+                                            ),
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text(
+                                                "${taraflar.last ?? ""}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -147,7 +195,7 @@ class PrecouponPage extends GetView<PrecouponController> {
                             });
                       },
                       onDataEmpty: () {
-                        return Container();
+                        return SizedBox();
                       }),
                 )
               ],

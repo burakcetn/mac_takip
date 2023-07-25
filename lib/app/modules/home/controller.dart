@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
 import 'package:getx_skeleton/app/repositories/match/match_repository.dart';
 import 'package:getx_skeleton/app/repositories/users/user_repository.dart';
+import 'package:getx_skeleton/app/routes/app_pages.dart';
 import 'package:getx_skeleton/models/match/live_match_model.dart';
 
 import 'index.dart';
+
+class ButtonModel {
+  String title;
+  String route;
+  dynamic data;
+  ButtonModel(this.title, this.route, {this.data});
+}
 
 class HomeController extends GetxController with MatchRepository {
   HomeController();
   final PageController pageController = PageController(viewportFraction: 0.8);
   final state = HomeState();
-  List<String> buttonText = [
-    "Ücretsiz Tahminler",
-    "Premium Tahminler",
-    "Geçmiş Tahminler",
-    "Özel Kupon",
-    "Geçmiş Kuponlar",
-    "Canlı Maçlar"
+  List<ButtonModel> buttonText = [
+    ButtonModel("Ücretsiz Tahminler", Routes.FREECOUPON),
+    ButtonModel("Premium Tahminler", Routes.PRECOUPON),
+    ButtonModel("Geçmiş Tahminler", Routes.FREECOUPON, data: COUPONTYPE.OLD),
+    ButtonModel("Özel Kupon", Routes.COUPON),
+    ButtonModel("Geçmiş Kuponlar", Routes.COUPON, data: COUPONTYPE.OLD),
+    ButtonModel("Canlı Maçlar", Routes.LIVE)
   ];
 
   // tap

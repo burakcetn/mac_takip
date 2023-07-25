@@ -70,28 +70,14 @@ class LoginPage extends GetView<LoginController> {
                       SizedBox(
                         height: 60,
                       ),
-                      SizedBox(
+                      Container(
                         height: 150,
-                        child: FittedBox(
-                          child: Container(
-                            height: 150,
-                            width: 200,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: ColorManager.shadowColor
-                                          .withOpacity(0.3),
-                                      blurRadius: 10),
-                                  BoxShadow(
-                                    color: ColorManager.shadowColor
-                                        .withOpacity(0.3),
-                                    spreadRadius: -2,
-                                    blurRadius: 5,
-                                  ),
-                                ],
-                                color: ColorManager.base20),
-                          ),
+                        width: 150,
+                        child: Image.asset(
+                          "assets/images/app_icon.png",
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.fitWidth,
                         ),
                       ),
                       SizedBox(

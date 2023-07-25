@@ -48,6 +48,7 @@ class CustomBottomNavbar extends StatelessWidget {
     }
     if (index != -1) {
       try {
+        
         notchBottomBarController.jumpTo(index);
       } catch (e) {}
     }
