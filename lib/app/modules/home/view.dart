@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 import 'package:getx_skeleton/models/match/live_match_model.dart';
+import 'package:getx_skeleton/utils/team_logo.dart';
 
 import '../../../utils/color_manager.dart';
 import '../../components/custom_future_builder.dart';
@@ -34,7 +35,10 @@ class HomePage extends GetView<HomeController> {
                 child: Icon(Icons.person),
               ),
             ),
-            title: Text("Uygulama Adı",style: Theme.of(context).textTheme.headlineMedium,),
+            title: Text(
+              "Uygulama Adı",
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
           backgroundColor: ColorManager.base20,
           body: ListView(
@@ -109,8 +113,7 @@ class HomePage extends GetView<HomeController> {
                         color: ColorManager.base00,
                         boxShadow: [
                           BoxShadow(
-                              color:
-                                  ColorManager.shadowColor.withOpacity(0.3),
+                              color: ColorManager.shadowColor.withOpacity(0.3),
                               blurRadius: 10),
                           BoxShadow(
                             color: ColorManager.shadowColor.withOpacity(0.3),
@@ -207,7 +210,8 @@ class LiveMatchItemWidget extends StatelessWidget {
                         CircleAvatar(
                           radius: 20,
                           child: Image.network(
-                            "https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbahçe_SK.png/200px-Fenerbahçe_SK.png",
+                            TeamsLogo().getLogo(item.ev ?? ""),
+                            width: 30,
                           ),
                         ),
                         Text(
@@ -254,7 +258,8 @@ class LiveMatchItemWidget extends StatelessWidget {
                         CircleAvatar(
                           radius: 20,
                           child: Image.network(
-                            "https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbahçe_SK.png/200px-Fenerbahçe_SK.png",
+                            TeamsLogo().getLogo(item.konuk ?? ""),
+                            width: 30,
                           ),
                         ),
                         Text(

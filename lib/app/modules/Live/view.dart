@@ -4,6 +4,7 @@ import 'package:getx_skeleton/app/components/custom_future_builder.dart';
 import 'package:getx_skeleton/models/match/live_match_model.dart';
 
 import '../../../utils/color_manager.dart';
+import '../../../utils/team_logo.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
@@ -95,26 +96,36 @@ class LivePage extends GetView<LiveController> {
                                       color: ColorManager.base00,
                                     ),
                                     child: Row(
-                                    
                                       children: [
                                         Expanded(
-                                          child: Row(    
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
-                                              SizedBox(width: 10,),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
                                               SizedBox(
                                                 width: 100,
                                                 child: Text(
                                                   item.ev ?? "",
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelLarge,
                                                 ),
                                               ),
-                                              CircleAvatar(),
-                                               SizedBox(width: 10,),
-                                        
+                                              ClipOval(
+                                                child: Image.network(
+                                                  TeamsLogo()
+                                                      .getLogo(item.ev ?? ""),
+                                                  width: 30,
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                width: 10,
+                                              ),
                                             ],
                                           ),
                                         ),
@@ -151,14 +162,20 @@ class LivePage extends GetView<LiveController> {
                                         ),
                                         Expanded(
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
-                                              CircleAvatar(),
+                                              Image.network(
+                                                TeamsLogo()
+                                                    .getLogo(item.konuk ?? ""),
+                                                width: 30,
+                                              ),
                                               SizedBox(
                                                 width: 100,
                                                 child: Text(
                                                   "${item.konuk}",
-                                                  overflow: TextOverflow.ellipsis,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
                                                   style: Theme.of(context)
                                                       .textTheme
                                                       .labelLarge,
