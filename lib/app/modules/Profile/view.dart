@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/components/custom_future_builder.dart';
+import 'package:getx_skeleton/app/repositories/users/user_repository.dart';
+import 'package:getx_skeleton/models/data_result/data_result.dart';
+import 'package:getx_skeleton/models/login/login_model.dart';
 
 import '../../../utils/color_manager.dart';
 import '../../components/AppbarClipper.dart';
@@ -20,7 +24,7 @@ class ProfilePage extends GetView<ProfileController> {
     return GetBuilder<ProfileController>(
       builder: (_) {
         final double screenW = MediaQuery.of(context).size.width;
-
+        var user = UserRepository.getLoginedUser();
         return Scaffold(
           backgroundColor: ColorManager.base20,
           body: Column(
@@ -64,7 +68,7 @@ class ProfilePage extends GetView<ProfileController> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "Kullanıcı Adı",
+                              user.user!.name!,
                               style: Theme.of(context)
                                   .textTheme
                                   .headlineSmall
@@ -80,7 +84,7 @@ class ProfilePage extends GetView<ProfileController> {
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                                 Text(
-                                  "Premium",
+                                  user.user!.role!,
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                               ],

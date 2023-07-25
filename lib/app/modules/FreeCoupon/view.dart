@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/custom_future_builder.dart';
 import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
 import 'package:getx_skeleton/models/coupon/free_coupon.dart';
+import 'package:getx_skeleton/utils/team_logo.dart';
 
 import '../../../models/coupon/coupon_model.dart';
 import '../../../models/data_result/data_result.dart';
@@ -70,9 +71,16 @@ class FreecouponPage extends GetView<FreecouponController> {
                       },
                       onSuccess: (items) {
                         return ListView.builder(
-                            itemCount: items.length,
+                            itemCount: items.length + 1,
                             itemBuilder: (context, itemNumber) {
+                              if (itemNumber == items.length) {
+                                return SizedBox(
+                                  height: 100,
+                                );
+                              }
                               FreeCoupon item = items[itemNumber];
+                              var taraflar =
+                                  item.taraflar.toString().split("-");
                               return Padding(
                                 padding: const EdgeInsets.symmetric(
                                     vertical: 8.0, horizontal: 24),
@@ -108,14 +116,20 @@ class FreecouponPage extends GetView<FreecouponController> {
                                             SizedBox(
                                               width: 100,
                                               child: Text(
-                                                item.taraflar ?? "",
+                                                taraflar.first ?? "",
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .labelLarge,
                                               ),
                                             ),
-                                            CircleAvatar(),
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  ColorManager.base00,
+                                              child: Image.network(TeamsLogo()
+                                                  .getLogo(
+                                                      "${taraflar.first}")),
+                                            ),
                                             SizedBox(
                                               width: 10,
                                             ),
@@ -130,7 +144,7 @@ class FreecouponPage extends GetView<FreecouponController> {
                                             padding: const EdgeInsets.only(
                                                 top: 12.0),
                                             child: Text(
-                                              "${item.oran} - ${item.oran}",
+                                              "${item.oran}",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium
@@ -142,7 +156,7 @@ class FreecouponPage extends GetView<FreecouponController> {
                                             padding: const EdgeInsets.only(
                                                 bottom: 8.0),
                                             child: Text(
-                                              "${item.oran}",
+                                              "${item.tahmin}",
                                               style: Theme.of(context)
                                                   .textTheme
                                                   .labelMedium
@@ -157,11 +171,16 @@ class FreecouponPage extends GetView<FreecouponController> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            CircleAvatar(),
+                                            CircleAvatar(
+                                              backgroundColor:
+                                                  ColorManager.base00,
+                                              child: Image.network(TeamsLogo()
+                                                  .getLogo("${taraflar.last}")),
+                                            ),
                                             SizedBox(
                                               width: 100,
                                               child: Text(
-                                                "${item.oran}",
+                                                "${taraflar.last ?? ""}",
                                                 overflow: TextOverflow.ellipsis,
                                                 style: Theme.of(context)
                                                     .textTheme
