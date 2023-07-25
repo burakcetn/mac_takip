@@ -20,7 +20,7 @@ class TeamsLogo {
 
   String getLogo(String team) {
     var result = "";
-    team = team.toLowerCase();
+    team = team.toLowerCase().trim();
     for (var char in team.runes) {
       final originalChar = String.fromCharCode(char);
       final englishChar = turkishToEnglishMap[originalChar];
