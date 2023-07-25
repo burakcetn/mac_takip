@@ -9,6 +9,7 @@ import 'package:logger/logger.dart';
 import 'app/components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'app/data/local/my_shared_pref.dart';
 import 'app/routes/app_pages.dart';
+import 'app/services/payment/payment_service.dart';
 import 'app/services/service_init.dart';
 import 'config/theme/my_theme.dart';
 import 'config/translations/localization_service.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
   // initialize local notifications service
   await AwesomeNotificationsHelper.init();
   await ServiceInit.init();
+
   runApp(
     ScreenUtilInit(
       designSize: const Size(375, 812),
