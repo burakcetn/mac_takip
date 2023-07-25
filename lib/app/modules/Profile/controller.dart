@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/users/user_repository.dart';
 
 import 'index.dart';
 
-class ProfileController extends GetxController {
+class ProfileController extends GetxController with UserRepository {
   ProfileController();
 
   final state = ProfileState();

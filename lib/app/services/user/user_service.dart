@@ -17,11 +17,13 @@ abstract class UserService {
   factory UserService(Dio dio, {String baseUrl}) = _UserService;
 
   @POST("register")
-  Future<DataResult<RegisterModel>> register(
-      @Body() RegisterModel registerModel);
+  Future<DataResult<LoginModel>> register(@Body() RegisterModel registerModel);
 
   @POST("login")
   Future<DataResult<LoginModel>> login(@Body() RegisterModel registerModel);
+
+  @GET("user-destroy")
+  Future<DataResult<List>> deleteAccount();
 
   @GET("user/profile")
   Future<DataResult<User>> profile();

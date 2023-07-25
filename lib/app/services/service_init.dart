@@ -12,6 +12,6 @@ class ServiceInit {
     Get.put(UserService(BaseClient.dio), permanent: true);
     Get.put(CouponService(BaseClient.dio), permanent: true);
     Get.put(MatchService(BaseClient.dio), permanent: true);
-    CouponRepository().getCoupons((response) => Logger().d(response));
+    // CouponRepository().getFreeCoupons(COUPONTYPE.NEW);
   }
 }

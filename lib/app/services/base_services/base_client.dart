@@ -9,6 +9,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../../../config/translations/strings_enum.dart';
 import '../../components/custom_snackbar.dart';
+import '../../data/local/my_shared_pref.dart';
 import 'api_exceptions.dart';
 
 enum RequestType {
@@ -34,11 +35,13 @@ class BaseClient {
     ))
     ..interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
           // Add a custom header to the request
           //TODO: Get token from storage
-          options.headers['Authorization'] =
-              'Bearer 18|gi7vmINsLMf5yfBfLE8m036Khcyw92Xr2wULqc8H';
+          var user = await MySharedPref.getLoginUser();
+          options.headers['Authorization'] = "Bearer ${user?.token ?? ""}";
+          options.headers['Accept'] = "application/json";
+          options.headers['Content-Type'] = "application/json";
           Logger().i(
             'REQUEST ║ ${options.method.toUpperCase()}\n'
             'url: ${options.path}\n'

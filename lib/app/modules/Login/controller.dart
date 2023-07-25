@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/custom_snackbar.dart';
+import 'package:getx_skeleton/app/modules/Login/widgets/register_form.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 
 import '../../repositories/users/user_repository.dart';
@@ -58,6 +59,15 @@ class LoginController extends GetxController {
     return false;
   }
 
-  Future<void> registerUser(String email, String password, String rePassword,
-      String userName) async {}
+  Future<bool> registerUser(String name, String email, String password) async {
+    var result = await repository.register(name, email, password);
+
+    if (result.status ?? false) {
+      Get.offAndToNamed(Routes.HOME);
+      return true;
+    } else {
+      CustomSnackBar.showCustomToast(message: result.message ?? "");
+    }
+    return false;
+  }
 }

@@ -20,10 +20,16 @@ class CustomBottomNavbar extends StatelessWidget {
     this.initIndex = 0,
   }) : super(key: key);
 
-  static changePage(GetPage page) {
-    final argument = page.arguments as PageArgument;
+  static changePage({GetPage? page, String? route}) {
+    var _route = "";
+    if (page != null) {
+      final argument = page.arguments as PageArgument;
+      _route = argument.route;
+    } else {
+      _route = route ?? "";
+    }
     int index = -1;
-    switch (argument.route) {
+    switch (_route) {
       case Routes.HOME:
         index = 0;
         break;
@@ -41,7 +47,9 @@ class CustomBottomNavbar extends StatelessWidget {
         break;
     }
     if (index != -1) {
-      notchBottomBarController.jumpTo(index);
+      try {
+        notchBottomBarController.jumpTo(index);
+      } catch (e) {}
     }
   }
 
@@ -61,10 +69,6 @@ class CustomBottomNavbar extends StatelessWidget {
           activePageIndex = index;
           items[index].onClickItem();
         },
-        showBlurBottomBar: true,
-        blurOpacity: 0.2,
-        blurFilterX: 5,
-        blurFilterY: 10,
       ),
     );
   }

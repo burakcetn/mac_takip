@@ -108,7 +108,10 @@ class LoginPage extends GetView<LoginController> {
                                 )
                               : RegisterForm(
                                   register: (registerModel) async {
-                                    return false;
+                                    return await controller.registerUser(
+                                        registerModel.username,
+                                        registerModel.email,
+                                        registerModel.password);
                                   },
                                   onPassControl: (pass1, pass2) {
                                     return pass1 == pass2;
@@ -129,7 +132,7 @@ class LoginPage extends GetView<LoginController> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Text(
-                                (controller.formType.value == FormType.login
+                                (controller.formType.value == FormType.register
                                         ? 'Hesabın var mı? Giriş yap'
                                         : 'Hesabın yok mu? Kayıt ol')
                                     .tr),

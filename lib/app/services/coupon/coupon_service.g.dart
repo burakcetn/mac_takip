@@ -21,13 +21,13 @@ class _CouponService implements CouponService {
   String? baseUrl;
 
   @override
-  Future<DataResult<List<CouponList>>> coupons(String status) async {
+  Future<DataResult<List<FreeCoupon>>> freeCoupons(String status) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'status': status};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResult<List<CouponList>>>(Options(
+        _setStreamType<DataResult<List<FreeCoupon>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -43,25 +43,26 @@ class _CouponService implements CouponService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DataResult<List<CouponList>>.fromJson(_result.data!);
+    final value = DataResult<List<FreeCoupon>>.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<DataResult<List<CouponList>>> couponsSpecial() async {
+  Future<DataResult<List<CouponSpecialList>>> couponsSpecial(
+      String status) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'status': status};
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResult<List<CouponList>>>(Options(
+        _setStreamType<DataResult<List<CouponSpecialList>>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'coupons-special',
+              'coupons-special-list',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -70,7 +71,7 @@ class _CouponService implements CouponService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DataResult<List<CouponList>>.fromJson(_result.data!);
+    final value = DataResult<List<CouponSpecialList>>.fromJson(_result.data!);
     return value;
   }
 

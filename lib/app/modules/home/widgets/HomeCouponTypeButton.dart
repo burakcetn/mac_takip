@@ -20,7 +20,7 @@ class HomeCouponTypeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.offAndToNamed(routePath),
+      onTap: () => Get.toNamed(routePath),
       child: Container(
         height: 60,
         width: 180,

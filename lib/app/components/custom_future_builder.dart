@@ -32,6 +32,9 @@ class CustomFutureBuilder<T> extends StatelessWidget {
               ),
             );
           }
+          if (data.data == null) {
+            return onError("data not found");
+          }
           DataResult<T>? result = data.data;
           if (!(result!.status ?? true)) {
             CustomSnackBar.showCustomSnackBar(

@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
 
 import 'index.dart';
 
-class FreecouponController extends GetxController {
+class FreecouponController extends GetxController with CouponRepository {
   FreecouponController();
 
   final state = FreecouponState();

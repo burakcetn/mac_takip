@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/base_page.dart';
+import 'package:getx_skeleton/app/modules/Login/index.dart';
 import 'package:getx_skeleton/utils/awesome_notifications_helper.dart';
+import 'package:logger/logger.dart';
+import 'app/components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'app/data/local/my_shared_pref.dart';
 import 'app/routes/app_pages.dart';
 import 'app/services/service_init.dart';
@@ -38,7 +41,10 @@ Future<void> main() async {
           title: "Maç Takip",
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
-
+          routingCallback: (route) {
+            showBottom = route?.current != Routes.LOGIN;
+            CustomBottomNavbar.changePage(route: route?.current);
+          },
           builder: (context, widget) {
             bool themeIsLight = MySharedPref.getThemeIsLight();
             return Theme(

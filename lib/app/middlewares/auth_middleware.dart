@@ -22,7 +22,7 @@ class AuthMiddleWare extends GetMiddleware {
             ? Transition.leftToRight
             : Transition.rightToLeft,
         arguments: PageArgument(page.name, page.arguments));
-    CustomBottomNavbar.changePage(page);
+    CustomBottomNavbar.changePage(page: page);
     return super.onPageCalled(page);
   }
 }

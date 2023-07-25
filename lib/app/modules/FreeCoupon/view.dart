@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/components/custom_future_builder.dart';
+import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
+import 'package:getx_skeleton/models/coupon/free_coupon.dart';
 
+import '../../../models/coupon/coupon_model.dart';
+import '../../../models/data_result/data_result.dart';
+import '../../../models/match/live_match_model.dart';
 import '../../../utils/color_manager.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
 import 'index.dart';
@@ -57,76 +63,122 @@ class FreecouponPage extends GetView<FreecouponController> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, itemNumber) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 24),
-                          child: Container(
-                            height: 80,
-                            width: screenW * 0.9,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: ColorManager.shadowColor
-                                        .withOpacity(0.3),
-                                    blurRadius: 10),
-                                BoxShadow(
-                                  color:
-                                      ColorManager.shadowColor.withOpacity(0.3),
-                                  spreadRadius: -2,
-                                  blurRadius: 5,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(15),
-                              color: ColorManager.base00,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  "Takım1",
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                CircleAvatar(),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 12.0),
-                                      child: Text(
-                                        "06:30",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(
-                                                color: Colors.deepOrange),
+                  child: CustomFutureBuilder<List<FreeCoupon>>(
+                      future: controller.getFreeCoupons(COUPONTYPE.NEW),
+                      onError: (msg) {
+                        return Text(msg);
+                      },
+                      onSuccess: (items) {
+                        return ListView.builder(
+                            itemCount: items.length,
+                            itemBuilder: (context, itemNumber) {
+                              FreeCoupon item = items[itemNumber];
+                              return Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 24),
+                                child: Container(
+                                  height: 80,
+                                  width: screenW * 0.9,
+                                  decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: ColorManager.shadowColor
+                                              .withOpacity(0.3),
+                                          blurRadius: 10),
+                                      BoxShadow(
+                                        color: ColorManager.shadowColor
+                                            .withOpacity(0.3),
+                                        spreadRadius: -2,
+                                        blurRadius: 5,
                                       ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Text(
-                                        "30 oct",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey),
+                                    ],
+                                    borderRadius: BorderRadius.circular(15),
+                                    color: ColorManager.base00,
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text(
+                                                item.taraflar ?? "",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                            ),
+                                            CircleAvatar(),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    )
-                                  ],
+                                      Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 12.0),
+                                            child: Text(
+                                              "${item.oran} - ${item.oran}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.deepOrange),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8.0),
+                                            child: Text(
+                                              "${item.oran}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.grey),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            CircleAvatar(),
+                                            SizedBox(
+                                              width: 100,
+                                              child: Text(
+                                                "${item.oran}",
+                                                overflow: TextOverflow.ellipsis,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                CircleAvatar(),
-                                Text(
-                                  "Takım1",
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
+                              );
+                            });
+                      },
+                      onDataEmpty: () {
+                        return SizedBox();
                       }),
                 )
               ],

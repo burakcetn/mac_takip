@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
 
 import 'index.dart';
 
-class CouponController extends GetxController {
+class CouponController extends GetxController with CouponRepository {
   CouponController();
 
   final state = CouponState();

@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:getx_skeleton/models/coupon/coupon_model.dart';
+import 'package:getx_skeleton/models/coupon/coupon_special_list.dart';
+import 'package:getx_skeleton/models/coupon/free_coupon.dart';
 import 'package:getx_skeleton/models/data_result/data_result.dart';
 import 'package:retrofit/retrofit.dart';
 import '../../../utils/constants.dart';
@@ -10,8 +12,10 @@ abstract class CouponService {
   factory CouponService(Dio dio, {String baseUrl}) = _CouponService;
 
   @GET("coupons")
-  Future<DataResult<List<CouponList>>> coupons(@Query("status") String status);
+  Future<DataResult<List<FreeCoupon>>> freeCoupons(
+      @Query("status") String status);
 
-  @GET("coupons-special")
-  Future<DataResult<List<CouponList>>> couponsSpecial();
+  @GET("coupons-special-list")
+  Future<DataResult<List<CouponSpecialList>>> couponsSpecial(
+      @Query("status") String status);
 }

@@ -1,4 +1,6 @@
 import 'package:getx_skeleton/models/coupon/coupon_model.dart';
+import 'package:getx_skeleton/models/coupon/coupon_special_list.dart';
+import 'package:getx_skeleton/models/coupon/free_coupon.dart';
 import 'package:getx_skeleton/models/login/login_model.dart';
 import 'package:getx_skeleton/models/match/live_match_model.dart';
 import 'package:getx_skeleton/models/register_model.dart';
@@ -14,6 +16,9 @@ class ModelConverter<T> implements JsonConverter<T, Object> {
       if (T == Coupon) return Coupon.fromJson(json) as T;
       if (T == CouponList) return CouponList.fromJson(json) as T;
       if (T == LiveMatchModel) return LiveMatchModel.fromJson(json) as T;
+      if (T == CouponSpecialList) return CouponSpecialList.fromJson(json) as T;
+      if (T == FreeCoupon) return FreeCoupon.fromJson(json) as T;
+      if (T == Map<String, dynamic>) return json as T;
     }
     if (json is List) {
       if (T == RegisterModel) {
@@ -34,12 +39,21 @@ class ModelConverter<T> implements JsonConverter<T, Object> {
       if (T == List<LiveMatchModel>) {
         return json.map((e) => LiveMatchModel.fromJson(e)).toList() as T;
       }
+      if (T == List<CouponSpecialList>) {
+        return json.map((e) => CouponSpecialList.fromJson(e)).toList() as T;
+      }
+      if (T == List<FreeCoupon>) {
+        return json.map((e) => FreeCoupon.fromJson(e)).toList() as T;
+      }
+      if (T == List) {
+        return json as T;
+      }
     }
-    throw Exception();
+    return json as T;
   }
 
   @override
-  Object toJson(T object) {
+  Object toJson(T? object) {
     if (T is RegisterModel) {
       return (T as RegisterModel).toJson();
     }

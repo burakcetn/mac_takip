@@ -21,15 +21,14 @@ class _UserService implements UserService {
   String? baseUrl;
 
   @override
-  Future<DataResult<RegisterModel>> register(
-      RegisterModel registerModel) async {
+  Future<DataResult<LoginModel>> register(RegisterModel registerModel) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(registerModel.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DataResult<RegisterModel>>(Options(
+        _setStreamType<DataResult<LoginModel>>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -45,7 +44,7 @@ class _UserService implements UserService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DataResult<RegisterModel>.fromJson(_result.data!);
+    final value = DataResult<LoginModel>.fromJson(_result.data!);
     return value;
   }
 
@@ -74,6 +73,33 @@ class _UserService implements UserService {
               baseUrl,
             ))));
     final value = DataResult<LoginModel>.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DataResult<List<dynamic>>> deleteAccount() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DataResult<List<dynamic>>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'user-destroy',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DataResult<List<dynamic>>.fromJson(_result.data!);
     return value;
   }
 
