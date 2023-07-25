@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/components/custom_future_builder.dart';
+import 'package:getx_skeleton/models/match/live_match_model.dart';
 
 import '../../../utils/color_manager.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
@@ -57,78 +59,120 @@ class LivePage extends GetView<LiveController> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                      itemCount: 6,
-                      itemBuilder: (context, itemNumber) {
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 8.0, horizontal: 24),
-                          child: Container(
-                            height: 80,
-                            width: screenW * 0.9,
-                            decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                    color: ColorManager.shadowColor
-                                        .withOpacity(0.3),
-                                    blurRadius: 10),
-                                BoxShadow(
-                                  color:
-                                      ColorManager.shadowColor.withOpacity(0.3),
-                                  spreadRadius: -2,
-                                  blurRadius: 5,
-                                ),
-                              ],
-                              borderRadius: BorderRadius.circular(15),
-                              color: ColorManager.base00,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  "Takım1",
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                                CircleAvatar(),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 12.0),
-                                      child: Text(
-                                        "1 - 0",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(
-                                                color: Colors.deepOrange),
-                                      ),
+                    child: CustomFutureBuilder<List<LiveMatchModel>>(
+                        future: controller.getLiveMatch(),
+                        onError: (message) {
+                          return Container();
+                        },
+                        onDataEmpty: () {
+                          return Text("Canlı Maç Bulunamadı");
+                        },
+                        onSuccess: (items) {
+                          return ListView.builder(
+                              itemCount: items.length,
+                              itemBuilder: (context, itemNumber) {
+                                LiveMatchModel item = items[itemNumber];
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8.0, horizontal: 24),
+                                  child: Container(
+                                    height: 80,
+                                    width: screenW * 0.9,
+                                    decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: ColorManager.shadowColor
+                                                .withOpacity(0.3),
+                                            blurRadius: 10),
+                                        BoxShadow(
+                                          color: ColorManager.shadowColor
+                                              .withOpacity(0.3),
+                                          spreadRadius: -2,
+                                          blurRadius: 5,
+                                        ),
+                                      ],
+                                      borderRadius: BorderRadius.circular(15),
+                                      color: ColorManager.base00,
                                     ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8.0),
-                                      child: Text(
-                                        "83'",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelMedium
-                                            ?.copyWith(color: Colors.grey),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                CircleAvatar(),
-                                Text(
-                                  "Takım1",
-                                  style: Theme.of(context).textTheme.labelLarge,
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }),
-                )
+                                    child: Row(
+                                    
+                                      children: [
+                                        Expanded(
+                                          child: Row(    
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              SizedBox(width: 10,),
+                                              SizedBox(
+                                                width: 100,
+                                                child: Text(
+                                                  item.ev ?? "",
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                ),
+                                              ),
+                                              CircleAvatar(),
+                                               SizedBox(width: 10,),
+                                        
+                                            ],
+                                          ),
+                                        ),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 12.0),
+                                              child: Text(
+                                                "${item.evgol} - ${item.depgol}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                        color:
+                                                            Colors.deepOrange),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 8.0),
+                                              child: Text(
+                                                "${item.dk}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                        color: Colors.grey),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        Expanded(
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              CircleAvatar(),
+                                              SizedBox(
+                                                width: 100,
+                                                child: Text(
+                                                  "${item.konuk}",
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              });
+                        }))
               ],
             ),
           ),

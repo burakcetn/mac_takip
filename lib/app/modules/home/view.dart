@@ -34,11 +34,11 @@ class HomePage extends GetView<HomeController> {
                 child: Icon(Icons.person),
               ),
             ),
-            title: Text("Uygulama Adı"),
+            title: Text("Uygulama Adı",style: Theme.of(context).textTheme.headlineMedium,),
           ),
           backgroundColor: ColorManager.base20,
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          body: ListView(
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -90,48 +90,47 @@ class HomePage extends GetView<HomeController> {
               SizedBox(
                 height: 12,
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: 6,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                        crossAxisCount: 3),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        height: 100,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          color: ColorManager.base00,
-                          boxShadow: [
-                            BoxShadow(
-                                color:
-                                    ColorManager.shadowColor.withOpacity(0.3),
-                                blurRadius: 10),
-                            BoxShadow(
-                              color: ColorManager.shadowColor.withOpacity(0.3),
-                              spreadRadius: -2,
-                              blurRadius: 5,
-                            ),
-                          ],
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text(
-                              controller.buttonText[index],
-                              textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.titleMedium,
-                            ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                      crossAxisCount: 3),
+                  itemBuilder: (BuildContext context, int index) {
+                    return Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: ColorManager.base00,
+                        boxShadow: [
+                          BoxShadow(
+                              color:
+                                  ColorManager.shadowColor.withOpacity(0.3),
+                              blurRadius: 10),
+                          BoxShadow(
+                            color: ColorManager.shadowColor.withOpacity(0.3),
+                            spreadRadius: -2,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Center(
+                          child: Text(
+                            controller.buttonText[index],
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.titleMedium,
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               )
             ],

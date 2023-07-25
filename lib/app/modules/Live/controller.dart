@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/repositories/match/match_repository.dart';
 
 import 'index.dart';
 
-class LiveController extends GetxController {
+class LiveController extends GetxController with MatchRepository {
   LiveController();
 
   final state = LiveState();
