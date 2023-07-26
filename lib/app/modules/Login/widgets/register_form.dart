@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 import '../../../../utils/color_manager.dart';
 import '../../../components/custom_snackbar.dart';
+import '../controller.dart';
 
 InputDecoration inputDecoration(
   String labelText,
@@ -68,27 +69,22 @@ class RegisterForm extends StatelessWidget {
   }) : super(key: key);
   OnPassMatch onPassControl;
   RegisterFunction register;
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController rePassword = TextEditingController();
-  TextEditingController firstName = TextEditingController();
-  TextEditingController lastName = TextEditingController();
-  TextEditingController userName = TextEditingController();
   RxBool registerState = false.obs;
+  LoginController controller = Get.find();
 
   void _register() async {
     registerState.value = false;
     registerState.update((val) {});
-    if (!onPassControl(password.text, rePassword.text)) {
+    if (!onPassControl(controller.password.text, controller.rePassword.text)) {
       CustomSnackBar.showCustomErrorToast(message: "Password did not match");
       return;
     }
     await register(RegisterModel(
-        username: userName.text,
-        email: email.text,
-        password: password.text,
-        firstName: firstName.text,
-        lastName: lastName.text));
+        username: controller.userName.text,
+        email: controller.email.text,
+        password: controller.password.text,
+        firstName: controller.firstName.text,
+        lastName: controller.lastName.text));
     registerState.update((val) {});
   }
 
@@ -99,7 +95,7 @@ class RegisterForm extends StatelessWidget {
       children: [
         TextFormField(
           style: Theme.of(context).textTheme.labelSmall,
-          controller: userName,
+          controller: controller.userName,
           decoration: inputDecoration('Username', Icons.person),
         ),
         SizedBox(
@@ -108,7 +104,7 @@ class RegisterForm extends StatelessWidget {
         TextFormField(
           keyboardType: TextInputType.emailAddress,
           style: Theme.of(context).textTheme.labelSmall,
-          controller: email,
+          controller: controller.email,
           decoration: inputDecoration('E-mail', Icons.person),
         ),
         SizedBox(
@@ -116,14 +112,14 @@ class RegisterForm extends StatelessWidget {
         ),
         TextFormField(
           style: Theme.of(context).textTheme.labelSmall,
-          controller: password,
+          controller: controller.password,
           decoration: inputDecoration('Password', Icons.lock),
         ),
         SizedBox(
           height: 8,
         ),
         TextFormField(
-          controller: rePassword,
+          controller: controller.rePassword,
           style: Theme.of(context).textTheme.labelSmall,
           decoration: inputDecoration('Retype Password', Icons.lock),
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/custom_snackbar.dart';
+import 'package:getx_skeleton/app/modules/Login/widgets/login_page_custom_painter.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/register_form.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 
@@ -13,8 +15,21 @@ class LoginController extends GetxController {
   LoginController();
   UserRepository repository = UserRepository();
   Rx<FormType> formType = FormType.login.obs;
+
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  TextEditingController rePassword = TextEditingController();
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController userName = TextEditingController();
   final state = LoginState();
 
+  final painter = CustomPaint(
+    size: Size(375.w, 812.h),
+    painter: LoginPageCustomPainter(
+        color: Theme.of(Get.context!).colorScheme.tertiary),
+  );
   // tap
   void handleTap(int index) {
     Get.snackbar(

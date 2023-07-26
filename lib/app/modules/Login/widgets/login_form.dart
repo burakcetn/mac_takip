@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_skeleton/app/modules/Login/controller.dart';
 
 import '../../../../utils/color_manager.dart';
 
@@ -54,14 +55,13 @@ class LoginForm extends StatelessWidget {
   Function(String email)? onEmailChange;
   Function(String password)? onPasswordChange;
   LoginFunction login;
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
   RxBool loginState = false.obs;
 
+  LoginController controller = Get.find();
   void _login() async {
     loginState.value = true;
     loginState.update((val) {});
-    await login(email.text, password.text);
+    await login(controller.email.text, controller.password.text);
     loginState.value = false;
     loginState.update((val) {});
   }
@@ -74,7 +74,7 @@ class LoginForm extends StatelessWidget {
         TextFormField(
           keyboardType: TextInputType.emailAddress,
           style: Theme.of(Get.context!).textTheme.labelSmall,
-          controller: email,
+          controller: controller.email,
           validator: (value) {
             return (value == null || value.isEmpty)
                 ? 'Please Enter Email'
@@ -92,7 +92,7 @@ class LoginForm extends StatelessWidget {
                 ? 'Please Enter Password'
                 : null;
           },
-          controller: password,
+          controller: controller.password,
           decoration: inputDecoration('Password', Icons.lock),
         ),
         SizedBox(

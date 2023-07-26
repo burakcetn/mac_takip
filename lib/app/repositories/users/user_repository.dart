@@ -64,4 +64,19 @@ class UserRepository {
     }
     return false;
   }
+
+  Future<bool> signOut() async {
+    if (await confirm(
+      Get.context!,
+      title: Text("Çıkış yapılıyor"),
+      content: Text("Çıkış yapmak istiyor musunuz"),
+      textOK: Text("Evet"),
+      textCancel: Text("Hayır"),
+    )) {
+      MySharedPref.clear();
+      Get.offAndToNamed(Routes.LOGIN);
+      return true;
+    }
+    return false;
+  }
 }

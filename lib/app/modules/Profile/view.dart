@@ -217,6 +217,43 @@ class ProfilePage extends GetView<ProfileController> {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.signOut();
+                  },
+                  child: Container(
+                    height: 60,
+                    width: screenW * 0.8,
+                    decoration: BoxDecoration(
+                      color: ColorManager.failure,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            color: ColorManager.shadowColor.withOpacity(0.3),
+                            blurRadius: 10),
+                        BoxShadow(
+                          color: ColorManager.shadowColor.withOpacity(0.3),
+                          spreadRadius: -2,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Çıkış yap",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: ColorManager.base00,
+                                fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         );
