@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/login_form.dart';
+import 'package:getx_skeleton/app/modules/Login/widgets/login_page_custom_painter.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/register_form.dart';
 import 'package:getx_skeleton/app/routes/app_pages.dart';
 
@@ -141,29 +142,5 @@ class LoginPage extends GetView<LoginController> {
         );
       },
     );
-  }
-}
-
-class LoginPageCustomPainter extends CustomPainter {
-  Color color;
-  LoginPageCustomPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = color;
-
-    Path path = Path()
-      ..moveTo(size.width, size.height / 8)
-      ..lineTo(0, 2 * size.height / 3)
-      ..lineTo(0, 0)
-      ..lineTo(size.width, 0)
-      ..close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
   }
 }
