@@ -44,7 +44,8 @@ Future<void> main() async {
           useInheritedMediaQuery: true,
           debugShowCheckedModeBanner: false,
           routingCallback: (route) {
-            showBottom.value = route?.current != Routes.LOGIN;
+            showBottom.value = route?.current != Routes.LOGIN &&
+                route?.route.runtimeType == GetPageRoute;
             showBottom.update((val) {});
             CustomBottomNavbar.changePage(route: route?.current);
           },

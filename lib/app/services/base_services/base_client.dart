@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:get/get.dart';
 import 'package:get/get_utils/get_utils.dart';
+import 'package:getx_skeleton/app/routes/app_pages.dart';
 import 'package:getx_skeleton/models/data_result/data_result.dart';
 import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -51,6 +53,11 @@ class BaseClient {
           return handler.next(options);
         },
         onError: (e, handler) {
+          if ((e.response?.statusCode ?? 0) == 401 &&
+              Get.currentRoute != Routes.LOGIN) {
+            Get.offAndToNamed(Routes.LOGIN);
+            return;
+          }
           Logger().e(e);
           handler.next(e);
         },

@@ -18,7 +18,7 @@ class BasePage extends StatefulWidget {
   State<BasePage> createState() => _BasePageState();
 }
 
-class _BasePageState extends State<BasePage> with TickerProviderStateMixin {
+class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -42,18 +42,14 @@ class _BasePageState extends State<BasePage> with TickerProviderStateMixin {
                             items: [
                               CustomBottomNavbarItem(
                                   item: BottomBarItem(
-                                    inActiveItem: AnimatedIcon(
-                                      icon: AnimatedIcons.home_menu,
-                                      progress: AnimationController(
-                                          vsync: this, duration: 1.seconds),
+                                    inActiveItem: Icon(
+                                      Icons.home,
                                       color: Theme.of(context)
                                           .colorScheme
                                           .secondary,
                                     ),
-                                    activeItem: AnimatedIcon(
-                                      icon: AnimatedIcons.home_menu,
-                                      progress: AnimationController(
-                                          vsync: this, duration: 1.seconds),
+                                    activeItem: Icon(
+                                      Icons.home,
                                       color:
                                           Theme.of(context).colorScheme.primary,
                                     ),

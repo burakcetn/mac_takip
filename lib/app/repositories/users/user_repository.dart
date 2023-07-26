@@ -5,6 +5,7 @@ import 'package:getx_skeleton/app/services/user/user_service.dart';
 import 'package:getx_skeleton/models/data_result/data_result.dart';
 import 'package:getx_skeleton/models/login/login_model.dart';
 import 'package:getx_skeleton/models/register_model.dart';
+import 'package:getx_skeleton/models/user/contact_post_model.dart';
 import 'package:getx_skeleton/models/user/user_model.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';
 
@@ -78,5 +79,16 @@ class UserRepository {
       return true;
     }
     return false;
+  }
+
+  Future<bool> contact(ContactPostModel contactPostModel) async {
+    if (contactPostModel.name.isEmpty ||
+        contactPostModel.email.isEmpty ||
+        contactPostModel.text.isEmpty) {
+      CustomSnackBar.showCustomErrorToast(message: "Eksik alanları doldurunuz");
+      return false;
+    }
+    var result = await service.contact(contactPostModel);
+    return result.status ?? false;
   }
 }

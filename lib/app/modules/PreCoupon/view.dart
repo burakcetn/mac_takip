@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/components/custom_future_builder.dart';
 import 'package:getx_skeleton/app/repositories/coupons/coupon_repository.dart';
+import 'package:getx_skeleton/app/repositories/users/user_repository.dart';
 
 import '../../../models/coupon/coupon_model.dart';
 import '../../../models/coupon/free_coupon.dart';
@@ -213,6 +215,57 @@ class PrecouponPage extends GetView<PrecouponController> {
                             });
                       },
                       onDataEmpty: () {
+                        if (UserRepository.getLoginedUser().user?.role ==
+                            "free") {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text("Lütfen hesabınızı yükseltin"),
+                              SizedBox(
+                                height: 20.h,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showPremiumPackagesDialog();
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: screenW * 0.8,
+                                    decoration: BoxDecoration(
+                                      color: ColorManager.base00,
+                                      borderRadius: BorderRadius.circular(15),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            color: ColorManager.shadowColor
+                                                .withOpacity(0.3),
+                                            blurRadius: 10),
+                                        BoxShadow(
+                                          color: ColorManager.shadowColor
+                                              .withOpacity(0.3),
+                                          spreadRadius: -2,
+                                          blurRadius: 5,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        "Paketleri İncele",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium
+                                            ?.copyWith(
+                                                color: ColorManager.base120,
+                                                fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
                         return SizedBox();
                       }),
                 )

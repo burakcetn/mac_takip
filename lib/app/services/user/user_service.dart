@@ -7,6 +7,7 @@ import 'package:getx_skeleton/models/profile_update/profile_update_model.dart';
 import 'package:getx_skeleton/models/register_model.dart';
 import 'package:retrofit/retrofit.dart';
 
+import '../../../models/user/contact_post_model.dart';
 import '../../../models/user/user_model.dart';
 import '../../../utils/constants.dart';
 
@@ -36,4 +37,7 @@ abstract class UserService {
 
   @GET("logout")
   Future<DataResult<User>> logout();
+
+  @POST("contact")
+  Future<DataResult<List>> contact(@Body() ContactPostModel updateModel);
 }

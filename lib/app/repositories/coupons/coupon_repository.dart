@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/services/coupon/coupon_service.dart';
 import 'package:getx_skeleton/models/coupon/coupon_model.dart';
@@ -26,6 +27,32 @@ class CouponRepository {
       COUPONTYPE type) {
     return service.couponsSpecial(type == COUPONTYPE.NEW ? "new" : "old");
   }
+}
+
+void showPremiumPackagesDialog() {
+  Get.dialog(Scaffold(
+    appBar: AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      automaticallyImplyLeading: false,
+      title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        SizedBox(
+          width: 10,
+        ),
+        IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.close,
+              color: Colors.black,
+            ))
+      ]),
+    ),
+    body: Center(
+      child: Text("Paketler yakında eklenecek"),
+    ),
+  ));
 }
 
 enum COUPONTYPE { NEW, OLD }

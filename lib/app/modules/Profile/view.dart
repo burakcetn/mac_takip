@@ -8,6 +8,7 @@ import 'package:getx_skeleton/models/login/login_model.dart';
 import '../../../utils/color_manager.dart';
 import '../../components/AppbarClipper.dart';
 import '../../components/CustomBottomNavbar/custom_buttom_navbar.dart';
+import '../../repositories/coupons/coupon_repository.dart';
 import 'index.dart';
 import 'widgets/widgets.dart';
 
@@ -155,7 +156,9 @@ class ProfilePage extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: GestureDetector(
-                  onTap: () => controller.showDialogContainer(context),
+                  onTap: () {
+                    controller.showDialogContainer(context);
+                  },
                   child: Container(
                     height: 50,
                     width: screenW * 0.8,
@@ -189,29 +192,35 @@ class ProfilePage extends GetView<ProfileController> {
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
-                child: Container(
-                  height: 50,
-                  width: screenW * 0.8,
-                  decoration: BoxDecoration(
-                    color: ColorManager.base00,
-                    borderRadius: BorderRadius.circular(15),
-                    boxShadow: [
-                      BoxShadow(
+                child: GestureDetector(
+                  onTap: showPremiumPackagesDialog,
+                  child: Container(
+                    height: 50,
+                    width: screenW * 0.8,
+                    decoration: BoxDecoration(
+                      color: ColorManager.base00,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            color: ColorManager.shadowColor.withOpacity(0.3),
+                            blurRadius: 10),
+                        BoxShadow(
                           color: ColorManager.shadowColor.withOpacity(0.3),
-                          blurRadius: 10),
-                      BoxShadow(
-                        color: ColorManager.shadowColor.withOpacity(0.3),
-                        spreadRadius: -2,
-                        blurRadius: 5,
+                          spreadRadius: -2,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Paketleri İncele",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: ColorManager.base120,
+                                fontWeight: FontWeight.w500),
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Paketleri İncele",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: ColorManager.base120,
-                          fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
