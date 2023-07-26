@@ -70,8 +70,13 @@ class LivePage extends GetView<LiveController> {
                         },
                         onSuccess: (items) {
                           return ListView.builder(
-                              itemCount: items.length,
+                              itemCount: items.length + 1,
                               itemBuilder: (context, itemNumber) {
+                                if (itemNumber == items.length) {
+                                  return SizedBox(
+                                    height: 100,
+                                  );
+                                }
                                 LiveMatchModel item = items[itemNumber];
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -95,94 +100,146 @@ class LivePage extends GetView<LiveController> {
                                       borderRadius: BorderRadius.circular(15),
                                       color: ColorManager.base00,
                                     ),
-                                    child: Row(
+                                    child: Column(
                                       children: [
-                                        Expanded(
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            boxShadow: [
+                                              BoxShadow(
+                                                  color: ColorManager
+                                                      .shadowColor
+                                                      .withOpacity(0.3),
+                                                  blurRadius: 10),
+                                              BoxShadow(
+                                                color: ColorManager.shadowColor
+                                                    .withOpacity(0.3),
+                                                spreadRadius: -2,
+                                                blurRadius: 5,
+                                              ),
+                                            ],
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(15),
+                                                topLeft: Radius.circular(15)),
+                                            color: ColorManager.base00,
+                                          ),
                                           child: Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              SizedBox(
-                                                width: 10,
-                                              ),
-                                              SizedBox(
-                                                width: 100,
-                                                child: Text(
-                                                  item.ev ?? "",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelLarge,
-                                                ),
-                                              ),
-                                              ClipOval(
-                                                child: Image.network(
-                                                  TeamsLogo()
-                                                      .getLogo(item.ev ?? ""),
-                                                  width: 30,
-                                                ),
+                                              Text(
+                                                item.lig ?? "",
                                               ),
                                               SizedBox(
                                                 width: 10,
                                               ),
+                                              Image(
+                                                  image:
+                                                      NetworkImage(item.ligl!))
                                             ],
                                           ),
                                         ),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
+                                        Row(
                                           children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 12.0),
-                                              child: Text(
-                                                "${item.evgol} - ${item.depgol}",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelMedium
-                                                    ?.copyWith(
-                                                        color:
-                                                            Colors.deepOrange),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: Text(
+                                                      item.ev ?? "",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge,
+                                                    ),
+                                                  ),
+                                                  ClipOval(
+                                                    child: Image.network(
+                                                      TeamsLogo().getLogo(
+                                                          item.ev ?? ""),
+                                                      width: 30,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          SizedBox.shrink(),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                ],
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 8.0),
-                                              child: Text(
-                                                "${item.dk}",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelMedium
-                                                    ?.copyWith(
-                                                        color: Colors.grey),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                        Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Image.network(
-                                                TeamsLogo()
-                                                    .getLogo(item.konuk ?? ""),
-                                                width: 30,
-                                              ),
-                                              SizedBox(
-                                                width: 100,
-                                                child: Text(
-                                                  "${item.konuk}",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelLarge,
+                                            Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 12.0),
+                                                  child: Text(
+                                                    "${item.evgol} - ${item.depgol}",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelMedium
+                                                        ?.copyWith(
+                                                            color: Colors
+                                                                .deepOrange),
+                                                  ),
                                                 ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 8.0),
+                                                  child: Text(
+                                                    "${item.dk}",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelMedium
+                                                        ?.copyWith(
+                                                            color: Colors.grey),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                            Expanded(
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Image.network(
+                                                    TeamsLogo().getLogo(
+                                                        item.konuk ?? ""),
+                                                    width: 30,
+                                                    errorBuilder: (context,
+                                                            error,
+                                                            stackTrace) =>
+                                                        SizedBox.shrink(),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 100,
+                                                    child: Text(
+                                                      "${item.konuk}",
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),

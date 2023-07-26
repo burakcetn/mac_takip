@@ -122,11 +122,16 @@ class PrecouponPage extends GetView<PrecouponController> {
                                               ),
                                             ),
                                             CircleAvatar(
+                                              radius: 15,
                                               backgroundColor:
                                                   ColorManager.base00,
-                                              child: Image.network(TeamsLogo()
-                                                  .getLogo(
-                                                      "${taraflar.first}")),
+                                              child: Image.network(
+                                                TeamsLogo().getLogo(
+                                                    "${taraflar.first}"),
+                                                errorBuilder: (context, error,
+                                                        stackTrace) =>
+                                                    SizedBox.shrink(),
+                                              ),
                                             ),
                                             SizedBox(
                                               width: 10,
@@ -138,6 +143,18 @@ class PrecouponPage extends GetView<PrecouponController> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 12.0),
+                                            child: Text(
+                                              "${item.durum}",
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelMedium
+                                                  ?.copyWith(
+                                                      color: Colors.deepOrange),
+                                            ),
+                                          ),
                                           Padding(
                                             padding: const EdgeInsets.only(
                                                 top: 12.0),
@@ -170,6 +187,7 @@ class PrecouponPage extends GetView<PrecouponController> {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             CircleAvatar(
+                                              radius: 15,
                                               backgroundColor:
                                                   ColorManager.base00,
                                               child: Image.network(TeamsLogo()

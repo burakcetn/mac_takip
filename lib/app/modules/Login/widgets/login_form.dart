@@ -11,11 +11,12 @@ InputDecoration inputDecoration(
   String? helperText,
 }) {
   return InputDecoration(
-    contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+    contentPadding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
     helperText: helperText,
-    labelText: labelText,
-    labelStyle: TextStyle(color: Colors.grey, fontSize: 16),
-    fillColor: ColorManager.base20,
+    hintText: labelText,
+    hintStyle: TextStyle(color: Colors.grey, fontSize: 14),
+    labelStyle: TextStyle(color: Colors.grey, fontSize: 14),
+    fillColor: Colors.transparent,
     filled: true,
     prefixText: prefix,
     prefixIcon: Icon(
@@ -70,53 +71,102 @@ class LoginForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextFormField(
-          keyboardType: TextInputType.emailAddress,
-          style: Theme.of(Get.context!).textTheme.labelSmall,
-          controller: controller.email,
-          validator: (value) {
-            return (value == null || value.isEmpty)
-                ? 'Please Enter Email'
-                : null;
-          },
-          decoration: inputDecoration('E-mail', Icons.person),
+        SizedBox(
+          height: 12,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Text(
+            "E posta Adresi",
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: TextFormField(
+            keyboardType: TextInputType.emailAddress,
+            style: Theme.of(Get.context!).textTheme.labelLarge,
+            controller: controller.email,
+            validator: (value) {
+              return (value == null || value.isEmpty)
+                  ? 'Please Enter Email'
+                  : null;
+            },
+            decoration: inputDecoration('E-mail', Icons.person),
+          ),
         ),
         SizedBox(
-          height: 24,
+          height: 12,
         ),
-        TextFormField(
-          style: Theme.of(context).textTheme.labelSmall,
-          validator: (value) {
-            return (value == null || value.isEmpty)
-                ? 'Please Enter Password'
-                : null;
-          },
-          controller: controller.password,
-          decoration: inputDecoration('Password', Icons.lock),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          child: Text(
+            "Şifre",
+            style: Theme.of(context).textTheme.labelLarge,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: TextFormField(
+            obscureText: true,
+            style: Theme.of(context).textTheme.labelLarge,
+            validator: (value) {
+              return (value == null || value.isEmpty)
+                  ? 'Please Enter Password'
+                  : null;
+            },
+            controller: controller.password,
+            decoration: inputDecoration('Password', Icons.key),
+          ),
         ),
         SizedBox(
           height: 32,
         ),
         Obx(
-          () => ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                minimumSize: Size(200, 50),
-                shape: RoundedRectangleBorder(
+          () => Center(
+            child: Container(
+              padding: EdgeInsets.all(0),
+              decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
-                ),
-                backgroundColor: Theme.of(context).colorScheme.primary),
-            onPressed: loginState.value ? null : () => _login(),
-            child: loginState.value
-                ? CircularProgressIndicator() // Show loading indicator
-                : Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 4),
-                    child: Text('Giriş Yap'.tr),
+                  gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: [
+                        ColorManager.loginGradient1,
+                        ColorManager.loginGradient2
+                      ])),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(0),
+                  minimumSize: Size(300, 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
                   ),
+                  backgroundColor: Colors.transparent,
+                ),
+                onPressed: loginState.value ? null : () => _login(),
+                child: loginState.value
+                    ? Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: CircularProgressIndicator(
+                            // backgroundColor: Colors.transparent,
+                            ),
+                      ) // Show loading indicator
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8.0, vertical: 2),
+                        child: Text(
+                          'Giriş Yap'.tr,
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ),
+              ),
+            ),
           ),
         ),
-        SizedBox(height: 32),
+        SizedBox(height: 16),
         // TextButton(
         //   onPressed: () {
         //     setState(() {

@@ -17,6 +17,8 @@ class ColorManager {
   static Color base80 = HexColor.fromHex("#7C7C7C");
   static Color base100 = HexColor.fromHex("#4A4A4A");
   static Color base120 = HexColor.fromHex("#2A2A2A");
+  static Color loginGradient1 = HexColor.fromHex("#9E40DE");
+  static Color loginGradient2 = HexColor.fromHex("#C5564D");
 
   static Color introColor1 = HexColor.fromHex("#DB2323");
   static Color introColor2 = HexColor.fromHex("#0D4E97");

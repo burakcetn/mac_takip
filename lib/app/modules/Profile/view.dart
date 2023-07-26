@@ -30,7 +30,7 @@ class ProfilePage extends GetView<ProfileController> {
           body: Column(
             children: [
               SizedBox(
-                height: 300,
+                height: 320,
                 child: Stack(
                   children: [
                     Align(
@@ -44,10 +44,22 @@ class ProfilePage extends GetView<ProfileController> {
                         ),
                       ),
                     ),
+                    Transform(
+                      transform: Matrix4.translationValues(0, 30, 0),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Image(
+                              image: AssetImage("assets/images/app_icon.png")),
+                        ),
+                      ),
+                    ),
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: Container(
-                        height: 150,
+                        height: 120,
                         width: screenW * 0.8,
                         decoration: BoxDecoration(
                           color: ColorManager.base00,
@@ -93,17 +105,6 @@ class ProfilePage extends GetView<ProfileController> {
                         ),
                       ),
                     ),
-                    /*  Transform(
-                      transform: Matrix4.translationValues(0, 50, 0),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundColor: ColorManager.base00,
-                          child: Icon(Icons.person),
-                        ),
-                      ),
-                    ) */
                   ],
                 ),
               ),
@@ -113,7 +114,7 @@ class ProfilePage extends GetView<ProfileController> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Container(
-                  height: 80,
+                  height: 60,
                   width: screenW * 0.8,
                   decoration: BoxDecoration(
                     color: ColorManager.base00,
@@ -153,8 +154,43 @@ class ProfilePage extends GetView<ProfileController> {
               ),
               Padding(
                 padding: const EdgeInsets.all(12.0),
+                child: GestureDetector(
+                  onTap: () => controller.showDialogContainer(context),
+                  child: Container(
+                    height: 50,
+                    width: screenW * 0.8,
+                    decoration: BoxDecoration(
+                      color: ColorManager.base00,
+                      borderRadius: BorderRadius.circular(15),
+                      boxShadow: [
+                        BoxShadow(
+                            color: ColorManager.shadowColor.withOpacity(0.3),
+                            blurRadius: 10),
+                        BoxShadow(
+                          color: ColorManager.shadowColor.withOpacity(0.3),
+                          spreadRadius: -2,
+                          blurRadius: 5,
+                        ),
+                      ],
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Bizimle İletişime Geçin",
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(
+                                color: ColorManager.base120,
+                                fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
                 child: Container(
-                  height: 80,
+                  height: 50,
                   width: screenW * 0.8,
                   decoration: BoxDecoration(
                     color: ColorManager.base00,
@@ -180,80 +216,82 @@ class ProfilePage extends GetView<ProfileController> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.deleteUser();
-                  },
-                  child: Container(
-                    height: 60,
-                    width: screenW * 0.8,
-                    decoration: BoxDecoration(
-                      color: ColorManager.failure,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
+              SizedBox(
+                height: 12,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      controller.deleteUser();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: screenW * 0.4,
+                      decoration: BoxDecoration(
+                        color: ColorManager.failure,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorManager.shadowColor.withOpacity(0.3),
+                              blurRadius: 10),
+                          BoxShadow(
                             color: ColorManager.shadowColor.withOpacity(0.3),
-                            blurRadius: 10),
-                        BoxShadow(
-                          color: ColorManager.shadowColor.withOpacity(0.3),
-                          spreadRadius: -2,
-                          blurRadius: 5,
+                            spreadRadius: -2,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Hesabımı Kapat",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                  color: ColorManager.base00,
+                                  fontWeight: FontWeight.w500),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Hesabımı Kapat",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                color: ColorManager.base00,
-                                fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: GestureDetector(
-                  onTap: () {
-                    controller.signOut();
-                  },
-                  child: Container(
-                    height: 60,
-                    width: screenW * 0.8,
-                    decoration: BoxDecoration(
-                      color: ColorManager.failure,
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
+                  GestureDetector(
+                    onTap: () {
+                      controller.signOut();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: screenW * 0.4,
+                      decoration: BoxDecoration(
+                        color: ColorManager.failure,
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: ColorManager.shadowColor.withOpacity(0.3),
+                              blurRadius: 10),
+                          BoxShadow(
                             color: ColorManager.shadowColor.withOpacity(0.3),
-                            blurRadius: 10),
-                        BoxShadow(
-                          color: ColorManager.shadowColor.withOpacity(0.3),
-                          spreadRadius: -2,
-                          blurRadius: 5,
+                            spreadRadius: -2,
+                            blurRadius: 5,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Çıkış yap",
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleMedium
+                              ?.copyWith(
+                                  color: ColorManager.base00,
+                                  fontWeight: FontWeight.w500),
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Çıkış yap",
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(
-                                color: ColorManager.base00,
-                                fontWeight: FontWeight.w500),
                       ),
                     ),
                   ),
-                ),
-              ),
+                ],
+              )
             ],
           ),
         );

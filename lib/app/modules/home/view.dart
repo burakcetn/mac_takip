@@ -83,7 +83,7 @@ class HomePage extends GetView<HomeController> {
                     return PageView.builder(
                         physics: BouncingScrollPhysics(),
                         controller: controller.pageController,
-                        itemCount: items.length,
+                        itemCount: items.length < 5 ? items.length : 5,
                         itemBuilder: (context, itemNumber) {
                           LiveMatchModel item = items[itemNumber];
                           return LiveMatchItemWidget(
@@ -200,13 +200,15 @@ class LiveMatchItemWidget extends StatelessWidget {
                 ),
                 Text(
                   item.lig ?? "",
+                  textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),
-                Text(
+                /*  Text(
                   "Week 10",
                   style: TextStyle(color: Colors.white),
                 ),
+             */
               ],
             ),
             Expanded(
@@ -223,6 +225,8 @@ class LiveMatchItemWidget extends StatelessWidget {
                           child: Image.network(
                             TeamsLogo().getLogo(item.ev ?? ""),
                             width: 30,
+                            errorBuilder: (context, error, stackTrace) =>
+                                SizedBox.shrink(),
                           ),
                         ),
                         Text(
@@ -273,6 +277,8 @@ class LiveMatchItemWidget extends StatelessWidget {
                           child: Image.network(
                             TeamsLogo().getLogo(item.konuk ?? ""),
                             width: 30,
+                            errorBuilder: (context, error, stackTrace) =>
+                                SizedBox.shrink(),
                           ),
                         ),
                         Text(
