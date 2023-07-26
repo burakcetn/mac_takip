@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/login_form.dart';
 import 'package:getx_skeleton/app/modules/Login/widgets/register_form.dart';
@@ -10,7 +11,7 @@ import 'index.dart';
 import 'widgets/widgets.dart';
 
 class LoginPage extends GetView<LoginController> {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage({Key? key}) : super(key: key);
 
   // 主视图
   Widget _buildView() {
@@ -22,117 +23,147 @@ class LoginPage extends GetView<LoginController> {
     return GetBuilder<LoginController>(
       builder: (_) {
         return Scaffold(
+          backgroundColor: ColorManager.base00,
           resizeToAvoidBottomInset: true,
-          appBar: AppBar(
-            elevation: 0,
-            leading: PopupMenuButton<int>(
-              icon: Icon(Icons.language),
-              itemBuilder: (context) => [
-                PopupMenuItem(
-                  value: 1,
-                  // row with 2 children
-                  child: Text(
-                    "Tr",
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ),
-                PopupMenuItem(
-                  value: 2,
-                  // row with two children
-                  child: Text(
-                    "En",
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                ),
-              ],
-              onSelected: (value) {
-                if (value == 1) {
-                  LocalizationService.updateLanguage("tr");
-                } else if (value == 2) {
-                  LocalizationService.updateLanguage("en");
-                }
-              },
-            ),
-            title: Text(
-              "language".tr,
-              style: Theme.of(context).textTheme.labelSmall,
-            ),
-          ),
-          body: GestureDetector(
-            onTap: () => FocusScope.of(context).unfocus(),
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SizedBox(
-                        height: 60,
-                      ),
-                      Container(
-                        height: 150,
-                        width: 150,
-                        child: Image.asset(
-                          "assets/images/app_icon.png",
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.fitWidth,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 60,
-                      ),
-                      Obx(
-                        () {
-                          return controller.formType.value == FormType.login
-                              ? LoginForm(
-                                  login: (email, password) async {
-                                    return await controller.loginUser(
-                                        email, password);
-                                  },
-                                )
-                              : RegisterForm(
-                                  register: (registerModel) async {
-                                    return await controller.registerUser(
-                                        registerModel.username,
-                                        registerModel.email,
-                                        registerModel.password);
-                                  },
-                                  onPassControl: (pass1, pass2) {
-                                    return pass1 == pass2;
-                                  },
-                                );
-                        },
-                      ),
-                      Obx(
-                        () => ElevatedButton(
-                          onPressed: () {
-                            if (controller.formType.value == FormType.login) {
-                              controller.formType.value = FormType.register;
-                            } else {
-                              controller.formType.value = FormType.login;
-                            }
-                            controller.formType.update((val) {});
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Text(
-                                (controller.formType.value == FormType.register
-                                        ? 'Hesabın var mı? Giriş yap'
-                                        : 'Hesabın yok mu? Kayıt ol')
-                                    .tr),
+          body: Stack(
+            children: [
+              CustomPaint(
+                size: Size(375.w, 812.h),
+                painter: LoginPageCustomPainter(
+                    color: Theme.of(context).colorScheme.tertiary),
+              ),
+              GestureDetector(
+                onTap: () => FocusScope.of(context).unfocus(),
+                child: SafeArea(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: 60,
                           ),
-                        ),
-                      )
-                    ],
+                          Container(
+                            height: 150,
+                            width: 150,
+                            child: Image.asset(
+                              "assets/images/app_icon.png",
+                              width: 150,
+                              height: 150,
+                              fit: BoxFit.fitWidth,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 60,
+                          ),
+                          Obx(
+                            () {
+                              return controller.formType.value == FormType.login
+                                  ? LoginForm(
+                                      login: (email, password) async {
+                                        return await controller.loginUser(
+                                            email, password);
+                                      },
+                                    )
+                                  : RegisterForm(
+                                      register: (registerModel) async {
+                                        return await controller.registerUser(
+                                            registerModel.username,
+                                            registerModel.email,
+                                            registerModel.password);
+                                      },
+                                      onPassControl: (pass1, pass2) {
+                                        return pass1 == pass2;
+                                      },
+                                    );
+                            },
+                          ),
+                          Obx(
+                            () => ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorManager.base00),
+                              onPressed: () {
+                                if (controller.formType.value ==
+                                    FormType.login) {
+                                  controller.formType.value = FormType.register;
+                                } else {
+                                  controller.formType.value = FormType.login;
+                                }
+                                controller.formType.update((val) {});
+                              },
+                              child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 8),
+                                  child: Text.rich(
+                                    TextSpan(
+                                      text: controller.formType.value ==
+                                              FormType.register
+                                          ? 'Hesabın var mı'
+                                          : 'Hesabın yok mu',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                      children: [
+                                        const TextSpan(
+                                            text: '?  ',
+                                            style: TextStyle(
+                                                color: Colors
+                                                    .black)), // Change color or style here as needed.
+                                        TextSpan(
+                                          text: controller.formType.value ==
+                                                  FormType.register
+                                              ? ' Giriş yap'
+                                              : ' Kayıt ol',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary,
+                                                  decoration:
+                                                      TextDecoration.underline),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+            ],
           ),
         );
       },
     );
+  }
+}
+
+class LoginPageCustomPainter extends CustomPainter {
+  Color color;
+  LoginPageCustomPainter({required this.color});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()..color = color;
+
+    Path path = Path()
+      ..moveTo(size.width, size.height / 8)
+      ..lineTo(0, 2 * size.height / 3)
+      ..lineTo(0, 0)
+      ..lineTo(size.width, 0)
+      ..close();
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return false;
   }
 }

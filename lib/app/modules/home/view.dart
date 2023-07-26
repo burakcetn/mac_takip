@@ -86,7 +86,8 @@ class HomePage extends GetView<HomeController> {
                         itemCount: items.length,
                         itemBuilder: (context, itemNumber) {
                           LiveMatchModel item = items[itemNumber];
-                          return LiveMatchItemWidget(item: item);
+                          return LiveMatchItemWidget(
+                              item: item, pageIndex: itemNumber);
                         });
                   },
                 ),
@@ -154,12 +155,12 @@ class HomePage extends GetView<HomeController> {
 }
 
 class LiveMatchItemWidget extends StatelessWidget {
-  const LiveMatchItemWidget({
-    Key? key,
-    required this.item,
-  }) : super(key: key);
+  const LiveMatchItemWidget(
+      {Key? key, required this.item, required this.pageIndex})
+      : super(key: key);
 
   final LiveMatchModel item;
+  final pageIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -186,7 +187,7 @@ class LiveMatchItemWidget extends StatelessWidget {
                 ? AssetImage("assets/images/homepage_screen1.png")
                 : AssetImage("assets/images/homepage_screen2.png"),
           ),
-          color: item.macid!.isEven ? Colors.purple : Colors.blueAccent,
+          color: pageIndex!.isEven ? Colors.purple : Colors.blueAccent,
           borderRadius: BorderRadius.circular(30),
         ),
         child: Column(
@@ -217,6 +218,7 @@ class LiveMatchItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
+                          backgroundColor: Colors.transparent,
                           radius: 20,
                           child: Image.network(
                             TeamsLogo().getLogo(item.ev ?? ""),
@@ -246,10 +248,11 @@ class LiveMatchItemWidget extends StatelessWidget {
                         height: 40,
                         width: 60,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(30),
-                            color: item.macid!.isOdd
-                                ? Colors.purple
-                                : Colors.blueAccent),
+                          borderRadius: BorderRadius.circular(30),
+                          color: pageIndex!.isOdd
+                              ? Colors.purple
+                              : Colors.blueAccent,
+                        ),
                         child: Center(
                             child: Text(item.dk ?? "",
                                 style: TextStyle(color: Colors.white))),
@@ -265,6 +268,7 @@ class LiveMatchItemWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircleAvatar(
+                          backgroundColor: Colors.transparent,
                           radius: 20,
                           child: Image.network(
                             TeamsLogo().getLogo(item.konuk ?? ""),

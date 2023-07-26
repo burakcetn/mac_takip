@@ -15,7 +15,7 @@ InputDecoration inputDecoration(
     helperText: helperText,
     labelText: labelText,
     labelStyle: TextStyle(color: Colors.grey, fontSize: 16),
-    fillColor: ColorManager.base40,
+    fillColor: ColorManager.base20,
     filled: true,
     prefixText: prefix,
     prefixIcon: Icon(
@@ -25,19 +25,19 @@ InputDecoration inputDecoration(
     prefixIconConstraints: BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
   );
 }
@@ -128,13 +128,21 @@ class RegisterForm extends StatelessWidget {
           decoration: inputDecoration('Retype Password', Icons.lock),
         ),
         SizedBox(
-          height: 8,
+          height: 32,
         ),
         ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              minimumSize: Size(200, 50),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              backgroundColor: Theme.of(context).colorScheme.primary),
           onPressed: registerState.value ? null : () => _register(),
           child: registerState.value
               ? CircularProgressIndicator() // Show loading indicator
-              : Text('register'.tr),
+              : Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  child: Text('Kayıt Ol'.tr)),
         ),
         SizedBox(
           height: 8,

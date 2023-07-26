@@ -34,7 +34,7 @@ class TeamsLogo {
     if (findItems.isNotEmpty) {
       return "https://sportteamslogo.com/api?key=73c138047bef46fab5ec2f4acf9dfa11&size=medium&tid=${findItems.first["id"]}";
     }
-    return "https://upload.wikimedia.org/wikipedia/tr/thumb/8/86/Fenerbahçe_SK.png/200px-Fenerbahçe_SK.png";
+    return "https://upload.wikimedia.org/wikipedia/commons/8/89/HD_transparent_picture.png";
   }
 
   final Map<String, String> turkishToEnglishMap = {

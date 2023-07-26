@@ -93,7 +93,7 @@ class ProfilePage extends GetView<ProfileController> {
                         ),
                       ),
                     ),
-                    Transform(
+                    /*  Transform(
                       transform: Matrix4.translationValues(0, 50, 0),
                       child: Align(
                         alignment: Alignment.topCenter,
@@ -103,7 +103,7 @@ class ProfilePage extends GetView<ProfileController> {
                           child: Icon(Icons.person),
                         ),
                       ),
-                    )
+                    ) */
                   ],
                 ),
               ),
@@ -142,7 +142,7 @@ class ProfilePage extends GetView<ProfileController> {
                                 fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        "30",
+                        "text",
                         style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             color: ColorManager.base120,
                             fontWeight: FontWeight.w500),

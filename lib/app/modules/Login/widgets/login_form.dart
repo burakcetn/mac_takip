@@ -14,7 +14,7 @@ InputDecoration inputDecoration(
     helperText: helperText,
     labelText: labelText,
     labelStyle: TextStyle(color: Colors.grey, fontSize: 16),
-    fillColor: ColorManager.base40,
+    fillColor: ColorManager.base20,
     filled: true,
     prefixText: prefix,
     prefixIcon: Icon(
@@ -24,19 +24,19 @@ InputDecoration inputDecoration(
     prefixIconConstraints: BoxConstraints(minWidth: 60),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.green),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(10),
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.grey),
     ),
   );
 }
@@ -100,10 +100,20 @@ class LoginForm extends StatelessWidget {
         ),
         Obx(
           () => ElevatedButton(
+            style: ElevatedButton.styleFrom(
+                minimumSize: Size(200, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                backgroundColor: Theme.of(context).colorScheme.primary),
             onPressed: loginState.value ? null : () => _login(),
             child: loginState.value
                 ? CircularProgressIndicator() // Show loading indicator
-                : Text('login'.tr),
+                : Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 4),
+                    child: Text('Giriş Yap'.tr),
+                  ),
           ),
         ),
         SizedBox(height: 32),
