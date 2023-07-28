@@ -112,92 +112,134 @@ class FreecouponPage extends GetView<FreecouponController> {
                                     borderRadius: BorderRadius.circular(15),
                                     color: ColorManager.base00,
                                   ),
-                                  child: Row(
+                                  child: Column(
                                     children: [
-                                      Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            SizedBox(
-                                              width: 100,
-                                              child: Text(
-                                                taraflar.first ?? "",
-                                                overflow: TextOverflow.ellipsis,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge,
-                                              ),
-                                            ),
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  ColorManager.base00,
-                                              child: Image.network(TeamsLogo()
-                                                  .getLogo(
-                                                      "${taraflar.first}")),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
+                                      Container(
+                                        width: screenW * 0.9,
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 4),
+                                        decoration: BoxDecoration(
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: ColorManager.shadowColor
+                                                    .withOpacity(0.3),
+                                                blurRadius: 10),
+                                            BoxShadow(
+                                              color: ColorManager.shadowColor
+                                                  .withOpacity(0.3),
+                                              spreadRadius: -2,
+                                              blurRadius: 5,
                                             ),
                                           ],
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(15),
+                                              topLeft: Radius.circular(15)),
+                                          color: ColorManager.base00,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "${item.coupon_date}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium
+                                                ?.copyWith(
+                                                    color: Colors.deepOrange),
+                                          ),
                                         ),
                                       ),
-                                      Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
+                                      Row(
                                         children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 12.0),
-                                            child: Text(
-                                              "${item.oran}",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelMedium
-                                                  ?.copyWith(
-                                                      color: Colors.deepOrange),
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    taraflar.first ?? "",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge,
+                                                  ),
+                                                ),
+                                                CircleAvatar(
+                                                  backgroundColor:
+                                                      ColorManager.base00,
+                                                  child: Image.network(
+                                                      TeamsLogo().getLogo(
+                                                          "${taraflar.first}")),
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 8.0),
-                                            child: Text(
-                                              "${item.tahmin}",
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelMedium
-                                                  ?.copyWith(
-                                                      color: Colors.grey),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  ColorManager.base00,
-                                              child: Image.network(TeamsLogo()
-                                                  .getLogo("${taraflar.last}")),
-                                            ),
-                                            SizedBox(
-                                              width: 100,
-                                              child: Text(
-                                                "${taraflar.last ?? ""}",
-                                                overflow: TextOverflow.ellipsis,
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge,
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 12.0),
+                                                child: Text(
+                                                  "${item.oran}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                          color: Colors
+                                                              .deepOrange),
+                                                ),
                                               ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 8.0),
+                                                child: Text(
+                                                  "${item.tahmin}",
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                          color: Colors.grey),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                          Expanded(
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                CircleAvatar(
+                                                  backgroundColor:
+                                                      ColorManager.base00,
+                                                  child: Image.network(
+                                                      TeamsLogo().getLogo(
+                                                          "${taraflar.last}")),
+                                                ),
+                                                SizedBox(
+                                                  width: 100,
+                                                  child: Text(
+                                                    "${taraflar.last ?? ""}",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge,
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),

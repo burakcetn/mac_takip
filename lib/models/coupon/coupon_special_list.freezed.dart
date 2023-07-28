@@ -260,6 +260,7 @@ mixin _$Item {
   String? get updatedAt => throw _privateConstructorUsedError;
   String? get taraflar => throw _privateConstructorUsedError;
   int? get eventId => throw _privateConstructorUsedError;
+  String? get coupon_date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -280,7 +281,8 @@ abstract class $ItemCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       String? taraflar,
-      int? eventId});
+      int? eventId,
+      String? coupon_date});
 }
 
 /// @nodoc
@@ -305,6 +307,7 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
     Object? updatedAt = freezed,
     Object? taraflar = freezed,
     Object? eventId = freezed,
+    Object? coupon_date = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -343,6 +346,10 @@ class _$ItemCopyWithImpl<$Res, $Val extends Item>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
+      coupon_date: freezed == coupon_date
+          ? _value.coupon_date
+          : coupon_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -362,7 +369,8 @@ abstract class _$$_ItemCopyWith<$Res> implements $ItemCopyWith<$Res> {
       String? createdAt,
       String? updatedAt,
       String? taraflar,
-      int? eventId});
+      int? eventId,
+      String? coupon_date});
 }
 
 /// @nodoc
@@ -383,6 +391,7 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
     Object? updatedAt = freezed,
     Object? taraflar = freezed,
     Object? eventId = freezed,
+    Object? coupon_date = freezed,
   }) {
     return _then(_$_Item(
       id: freezed == id
@@ -421,6 +430,10 @@ class __$$_ItemCopyWithImpl<$Res> extends _$ItemCopyWithImpl<$Res, _$_Item>
           ? _value.eventId
           : eventId // ignore: cast_nullable_to_non_nullable
               as int?,
+      coupon_date: freezed == coupon_date
+          ? _value.coupon_date
+          : coupon_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -437,7 +450,8 @@ class _$_Item implements _Item {
       this.createdAt,
       this.updatedAt,
       this.taraflar,
-      this.eventId});
+      this.eventId,
+      this.coupon_date});
 
   factory _$_Item.fromJson(Map<String, dynamic> json) => _$$_ItemFromJson(json);
 
@@ -459,10 +473,12 @@ class _$_Item implements _Item {
   final String? taraflar;
   @override
   final int? eventId;
+  @override
+  final String? coupon_date;
 
   @override
   String toString() {
-    return 'Item(id: $id, couponId: $couponId, oran: $oran, tahmin: $tahmin, durum: $durum, createdAt: $createdAt, updatedAt: $updatedAt, taraflar: $taraflar, eventId: $eventId)';
+    return 'Item(id: $id, couponId: $couponId, oran: $oran, tahmin: $tahmin, durum: $durum, createdAt: $createdAt, updatedAt: $updatedAt, taraflar: $taraflar, eventId: $eventId, coupon_date: $coupon_date)';
   }
 
   @override
@@ -482,13 +498,15 @@ class _$_Item implements _Item {
                 other.updatedAt == updatedAt) &&
             (identical(other.taraflar, taraflar) ||
                 other.taraflar == taraflar) &&
-            (identical(other.eventId, eventId) || other.eventId == eventId));
+            (identical(other.eventId, eventId) || other.eventId == eventId) &&
+            (identical(other.coupon_date, coupon_date) ||
+                other.coupon_date == coupon_date));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, couponId, oran, tahmin,
-      durum, createdAt, updatedAt, taraflar, eventId);
+      durum, createdAt, updatedAt, taraflar, eventId, coupon_date);
 
   @JsonKey(ignore: true)
   @override
@@ -514,7 +532,8 @@ abstract class _Item implements Item {
       final String? createdAt,
       final String? updatedAt,
       final String? taraflar,
-      final int? eventId}) = _$_Item;
+      final int? eventId,
+      final String? coupon_date}) = _$_Item;
 
   factory _Item.fromJson(Map<String, dynamic> json) = _$_Item.fromJson;
 
@@ -536,6 +555,8 @@ abstract class _Item implements Item {
   String? get taraflar;
   @override
   int? get eventId;
+  @override
+  String? get coupon_date;
   @override
   @JsonKey(ignore: true)
   _$$_ItemCopyWith<_$_Item> get copyWith => throw _privateConstructorUsedError;

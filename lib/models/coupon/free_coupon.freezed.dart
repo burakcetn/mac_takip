@@ -29,6 +29,7 @@ mixin _$FreeCoupon {
   dynamic? get taraflar => throw _privateConstructorUsedError;
   dynamic? get eventId => throw _privateConstructorUsedError;
   Coupon2? get coupon => throw _privateConstructorUsedError;
+  String? get coupon_date => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +52,8 @@ abstract class $FreeCouponCopyWith<$Res> {
       String? updatedAt,
       dynamic? taraflar,
       dynamic? eventId,
-      Coupon2? coupon});
+      Coupon2? coupon,
+      String? coupon_date});
 
   $Coupon2CopyWith<$Res>? get coupon;
 }
@@ -78,6 +80,7 @@ class _$FreeCouponCopyWithImpl<$Res, $Val extends FreeCoupon>
     Object? taraflar = freezed,
     Object? eventId = freezed,
     Object? coupon = freezed,
+    Object? coupon_date = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -116,6 +119,10 @@ class _$FreeCouponCopyWithImpl<$Res, $Val extends FreeCoupon>
           ? _value.coupon
           : coupon // ignore: cast_nullable_to_non_nullable
               as Coupon2?,
+      coupon_date: freezed == coupon_date
+          ? _value.coupon_date
+          : coupon_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 
@@ -149,7 +156,8 @@ abstract class _$$_FreeCouponCopyWith<$Res>
       String? updatedAt,
       dynamic? taraflar,
       dynamic? eventId,
-      Coupon2? coupon});
+      Coupon2? coupon,
+      String? coupon_date});
 
   @override
   $Coupon2CopyWith<$Res>? get coupon;
@@ -175,6 +183,7 @@ class __$$_FreeCouponCopyWithImpl<$Res>
     Object? taraflar = freezed,
     Object? eventId = freezed,
     Object? coupon = freezed,
+    Object? coupon_date = freezed,
   }) {
     return _then(_$_FreeCoupon(
       id: freezed == id
@@ -213,6 +222,10 @@ class __$$_FreeCouponCopyWithImpl<$Res>
           ? _value.coupon
           : coupon // ignore: cast_nullable_to_non_nullable
               as Coupon2?,
+      coupon_date: freezed == coupon_date
+          ? _value.coupon_date
+          : coupon_date // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -229,7 +242,8 @@ class _$_FreeCoupon implements _FreeCoupon {
       this.updatedAt,
       this.taraflar,
       this.eventId,
-      this.coupon});
+      this.coupon,
+      this.coupon_date});
 
   factory _$_FreeCoupon.fromJson(Map<String, dynamic> json) =>
       _$$_FreeCouponFromJson(json);
@@ -252,10 +266,12 @@ class _$_FreeCoupon implements _FreeCoupon {
   final dynamic? eventId;
   @override
   final Coupon2? coupon;
+  @override
+  final String? coupon_date;
 
   @override
   String toString() {
-    return 'FreeCoupon(id: $id, oran: $oran, tahmin: $tahmin, durum: $durum, createdAt: $createdAt, updatedAt: $updatedAt, taraflar: $taraflar, eventId: $eventId, coupon: $coupon)';
+    return 'FreeCoupon(id: $id, oran: $oran, tahmin: $tahmin, durum: $durum, createdAt: $createdAt, updatedAt: $updatedAt, taraflar: $taraflar, eventId: $eventId, coupon: $coupon, coupon_date: $coupon_date)';
   }
 
   @override
@@ -273,7 +289,9 @@ class _$_FreeCoupon implements _FreeCoupon {
                 other.updatedAt == updatedAt) &&
             const DeepCollectionEquality().equals(other.taraflar, taraflar) &&
             const DeepCollectionEquality().equals(other.eventId, eventId) &&
-            (identical(other.coupon, coupon) || other.coupon == coupon));
+            (identical(other.coupon, coupon) || other.coupon == coupon) &&
+            (identical(other.coupon_date, coupon_date) ||
+                other.coupon_date == coupon_date));
   }
 
   @JsonKey(ignore: true)
@@ -288,7 +306,8 @@ class _$_FreeCoupon implements _FreeCoupon {
       updatedAt,
       const DeepCollectionEquality().hash(taraflar),
       const DeepCollectionEquality().hash(eventId),
-      coupon);
+      coupon,
+      coupon_date);
 
   @JsonKey(ignore: true)
   @override
@@ -314,7 +333,8 @@ abstract class _FreeCoupon implements FreeCoupon {
       final String? updatedAt,
       final dynamic? taraflar,
       final dynamic? eventId,
-      final Coupon2? coupon}) = _$_FreeCoupon;
+      final Coupon2? coupon,
+      final String? coupon_date}) = _$_FreeCoupon;
 
   factory _FreeCoupon.fromJson(Map<String, dynamic> json) =
       _$_FreeCoupon.fromJson;
@@ -337,6 +357,8 @@ abstract class _FreeCoupon implements FreeCoupon {
   dynamic? get eventId;
   @override
   Coupon2? get coupon;
+  @override
+  String? get coupon_date;
   @override
   @JsonKey(ignore: true)
   _$$_FreeCouponCopyWith<_$_FreeCoupon> get copyWith =>

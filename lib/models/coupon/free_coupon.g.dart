@@ -19,6 +19,7 @@ _$_FreeCoupon _$$_FreeCouponFromJson(Map<String, dynamic> json) =>
       coupon: json['coupon'] == null
           ? null
           : Coupon2.fromJson(json['coupon'] as Map<String, dynamic>),
+      coupon_date: json['coupon_date'] as String?,
     );
 
 Map<String, dynamic> _$$_FreeCouponToJson(_$_FreeCoupon instance) =>
@@ -32,6 +33,7 @@ Map<String, dynamic> _$$_FreeCouponToJson(_$_FreeCoupon instance) =>
       'taraflar': instance.taraflar,
       'eventId': instance.eventId,
       'coupon': instance.coupon,
+      'coupon_date': instance.coupon_date,
     };
 
 _$_Coupon2 _$$_Coupon2FromJson(Map<String, dynamic> json) => _$_Coupon2(

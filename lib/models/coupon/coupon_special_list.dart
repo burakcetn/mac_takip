@@ -40,6 +40,7 @@ class Item with _$Item {
     String? updatedAt,
     String? taraflar,
     int? eventId,
+    String? coupon_date,
   }) = _Item;
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);

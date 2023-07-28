@@ -37,6 +37,7 @@ _$_Item _$$_ItemFromJson(Map<String, dynamic> json) => _$_Item(
       updatedAt: json['updatedAt'] as String?,
       taraflar: json['taraflar'] as String?,
       eventId: json['eventId'] as int?,
+      coupon_date: json['coupon_date'] as String?,
     );
 
 Map<String, dynamic> _$$_ItemToJson(_$_Item instance) => <String, dynamic>{
@@ -49,4 +50,5 @@ Map<String, dynamic> _$$_ItemToJson(_$_Item instance) => <String, dynamic>{
       'updatedAt': instance.updatedAt,
       'taraflar': instance.taraflar,
       'eventId': instance.eventId,
+      'coupon_date': instance.coupon_date,
     };

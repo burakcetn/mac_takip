@@ -25,6 +25,7 @@ class FreeCoupon with _$FreeCoupon {
     dynamic? taraflar,
     dynamic? eventId,
     Coupon2? coupon,
+    String? coupon_date,
   }) = _FreeCoupon;
 
   factory FreeCoupon.fromJson(Map<String, dynamic> json) =>

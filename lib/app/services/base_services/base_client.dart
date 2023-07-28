@@ -23,9 +23,7 @@ enum RequestType {
 
 class BaseClient {
   static final Dio _dio = Dio()
-    ..options = BaseOptions(
-      headers: {"asd": "asd"},
-    )
+    ..options = BaseOptions()
     ..interceptors.add(PrettyDioLogger(
       requestHeader: true,
       requestBody: true,
